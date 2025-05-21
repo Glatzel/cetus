@@ -1,0 +1,11 @@
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - "D:/resource/volume/mysql/log:/var/log/mysql"
+      - "D:/resource/volume/mysql/data:/var/lib/mysql"
+      - "D:/resource/mysql/my.cnf:/etc/mysql/conf.d/my.cnf"

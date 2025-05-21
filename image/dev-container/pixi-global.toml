@@ -1,0 +1,42 @@
+version = 1
+
+[envs.dev-tool]
+channels = ["conda-forge", "https://repo.prefix.dev/glatzel"]
+
+[envs.dev-tool.dependencies]
+aria2 = "*"
+cargo-llvm-cov = "*"
+cargo-nextest = "*"
+cmake = "*"
+edit = "*"
+ffmpeg = "*"
+gh = "*"
+git-cliff = "*"
+go-yq = "*"
+imagemagick = "*"
+jq = "*"
+nomkl = "*"
+p7zip = "*"
+python = "3.11.*"
+qpdf = "*"
+ruff = "*"
+starship = "*"
+zstd = "*"
+
+[envs.dev-tool.exposed]
+7z = "7z"
+aria2 = "aria2c"
+cargo-llvm-cov = "cargo-llvm-cov"
+cargo-nextest = "cargo-nextest"
+cmake = "cmake"
+edit = "edit"
+ffmpeg = "ffmpeg"
+gh = "gh"
+git-cliff = "git-cliff"
+jq = "jq"
+magick = "magick"
+qpdf = "qpdf"
+ruff = "ruff"
+starship = "starship"
+yq = "yq"
+zstd = "zstd"

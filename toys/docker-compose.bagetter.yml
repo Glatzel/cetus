@@ -1,0 +1,18 @@
+services:
+  bagetter:
+    container_name: bagetter
+    image: bagetter/bagetter:latest
+    restart: always
+    ports:
+      - 8020:8020
+    volumes:
+      - "D:/resource/volume/bagetter:/data"
+    environment:
+      - "ApiKey=123456"
+      - "ASPNETCORE_HTTP_PORTS=8020"
+      - "Storage__Type=FileSystem"
+      - "Storage__Path=/data"
+      - "Database__Type=Sqlite"
+      - "Database__ConnectionString=Data Source=/data/db/bagetter.db"
+      - "Search__Type=Database"
+      - "AllowPackageOverwrites=true"

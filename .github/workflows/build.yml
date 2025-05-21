@@ -1,0 +1,103 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - ready_for_review
+  schedule:
+    - cron: 16 0 * * 1
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changed:
+    outputs:
+      changed-dev-container: ${{ steps.main.outputs.dev_container_any_changed }}
+      changed-github-action-runner: ${{ steps.main.outputs.github_action_runner_any_changed }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: main
+        uses: tj-actions/changed-files@v46
+        with:
+          files_yaml: |
+            dev_container:
+              - ./image/common/**
+              - ./image/dev-container/**
+            github_action_runner:
+              - ./image/common/**
+              - ./image/github-action-runner/**
+  dev-container:
+    needs: changed
+    if: ${{ needs.changed.outputs.changed-dev-container != 'false' }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Log in to DockerHub
+      uses: docker/login-action@v3
+      with:
+        username: glatzel
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build Docker image
+      run: docker build -f dev-container/Dockerfile -t glatzel/dev-container:latest .
+      working-directory: image
+
+    - run: |
+        docker images
+        docker history --human --no-trunc glatzel/dev-container:latest
+
+    - name: Push Docker image
+      if: ${{github.event_name !='pull_request'}}
+      run: |
+        docker push glatzel/dev-container:latest
+
+
+  github-action-runner:
+    runs-on: ubuntu-latest
+    needs: changed
+    if: ${{ needs.changed.outputs.changed-github-action-runner != 'false' }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Log in to DockerHub
+      uses: docker/login-action@v3
+      with:
+        username: glatzel
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - id: get-version
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: ./image/github-action-runner/get-runner-version.ps1
+      shell: pwsh
+
+    - name: Build Docker image
+      run: |
+        echo "Runner version is ${{ steps.get-version.outputs.version }}"
+        docker build -f github-action-runner/Dockerfile \
+          --build-arg RUNNER_VERSION=${{ steps.get-version.outputs.version }} \
+          -t glatzel/github-action-runner:latest \
+          -t glatzel/github-action-runner:${{ steps.get-version.outputs.version }} \
+          .
+      working-directory: image
+
+    - run: |
+        docker images
+        docker history --human --no-trunc glatzel/github-action-runner:latest
+
+    - name: Push Docker image
+      if: ${{github.event_name !='pull_request'}}
+      run: |
+        docker push glatzel/github-action-runner:latest
+        docker push glatzel/github-action-runner:${{ steps.get-version.outputs.version }}

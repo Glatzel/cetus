@@ -1,0 +1,107 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+\u256D[\ue0b6](c0)$os$shell$hostname$username[\ue0b0](fg:c0 bg:c1)\
+$directory[\ue0b0](fg:c1 bg:c2)\
+$time[\ue0b0](fg:c2 bg:c3)\
+$cmd_duration[\ue0b0](c3)\
+(
+\u251C\u2500\
+$git_branch$git_status\
+$conda$python\
+)
+\u2570\u2500$character"""
+palette = 'fern'
+
+[palettes.fern]
+font_light = '#e3e5e5'
+font_dark = '#2d3436'
+c0 = '#51D2EC'
+c1 = '#769ff0'
+c2 = '#aba0ed'
+c3 = '#D2C5F7'
+
+# line1-------------------------------------------------------------------------
+[os]
+format = "[$symbol](fg:font_dark bg:c0)"
+disabled = false
+
+[os.symbols]
+Windows = "\uf17a "
+Macos = "\ue711 "
+Linux = "\uf17c "
+
+Amazon = "\uf270 "
+Android = "\ue70e "
+Arch = "\uf303 "
+CentOS = "\uef3d "
+Debian = "\ue77d "
+Fedora = "\uef46 "
+FreeBSD = "\uf28f "
+Mint = "\uF30e "
+Redhat = "\uef5d "
+Ubuntu = "\uf31c "
+
+[shell]
+format = "[$indicator ](fg:font_dark bg:c0)"
+disabled = false
+bash_indicator = "\uebca"
+fish_indicator = "\uee41"
+zsh_indicator = "\uf489 zsh"
+powershell_indicator = "\uebc7"
+ion_indicator = "\ue66b"
+cmd_indicator = "\uebc4"
+unknown_indicator = "\uf489 ?"
+
+[hostname]
+ssh_only = true
+format = "[\ueba9 $hostname ](fg:font_dark bg:c0)"
+disabled = false
+
+[username]
+format = "[\uf2c0 $user ](fg:font_dark bg:c0)"
+disabled = false
+show_always = true
+
+[directory]
+format = "[\uea83 $path ](fg:font_dark bg:c1)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[time]
+disabled = false
+time_format = "%X"
+style = "bg:#1d2230"
+format = "[\uf43a $time](fg:font_dark bg:c2)"
+
+[cmd_duration]
+min_time = 1
+show_milliseconds=true
+format = "[\uf252 $duration](fg:font_dark bg:c3)"
+
+# line2-------------------------------------------------------------------------
+[git_branch]
+symbol = "\uf418"
+format = '[$symbol $branch](#ff9e64)'
+
+[git_status]
+format = "[( \uf044  $all_status)( $ahead_behind) ](#ff9e64)"
+
+ahead = "\uf46a \u21E1${count}"
+behind = "\uf46a \u21E3${count}"
+diverged = "\uf46a \u21E1${ahead_count} \u21E3${behind_count}"
+up_to_date = "\u2261"
+
+conflicted = "!($count )"
+untracked = '?($count )'
+stashed = '$($count )'
+modified = '~($count )'
+staged = "+($count )"
+renamed = ">($count )"
+deleted = "-($count )"
+
+[conda]
+format = "[\uec16 $environment ](#9ece6a)"
+
+[python]
+format = "[(\ue235 $version) ](#E5C07B)"

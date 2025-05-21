@@ -1,0 +1,10 @@
+services:
+  pypi:
+    container_name: pypi
+    image: pypiserver/pypiserver:latest
+    restart: always
+    ports:
+      - 8081:8080
+    volumes:
+      - "D:/resource/volume/pypi:/data/packages"
+    command: "run -P . -a . -o"

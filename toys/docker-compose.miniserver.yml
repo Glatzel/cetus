@@ -1,0 +1,10 @@
+services:
+  miniserver:
+    container_name: miniserver
+    image: svenstaro/miniserve:latest
+    restart: no
+    ports:
+      - 8080:8080
+    volumes:
+      - "D:/resource/volume/share:/share"
+    command: "-u -U -o -q /share"
