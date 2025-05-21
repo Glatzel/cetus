@@ -14,22 +14,22 @@ $conda$python\
 palette = 'fern'
 
 [palettes.fern]
-font_light = '#e3e5e5'
-font_dark = '#2d3436'
 c0 = '#51D2EC'
 c1 = '#769ff0'
 c2 = '#aba0ed'
 c3 = '#D2C5F7'
+font_dark = '#2d3436'
+font_light = '#e3e5e5'
 
 # line1-------------------------------------------------------------------------
 [os]
-format = "[$symbol](fg:font_dark bg:c0)"
 disabled = false
+format = "[$symbol](fg:font_dark bg:c0)"
 
 [os.symbols]
-Windows = "\uf17a "
-Macos = "\ue711 "
 Linux = "\uf17c "
+Macos = "\ue711 "
+Windows = "\uf17a "
 
 Amazon = "\uf270 "
 Android = "\ue70e "
@@ -43,24 +43,24 @@ Redhat = "\uef5d "
 Ubuntu = "\uf31c "
 
 [shell]
-format = "[$indicator ](fg:font_dark bg:c0)"
-disabled = false
 bash_indicator = "\uebca"
-fish_indicator = "\uee41"
-zsh_indicator = "\uf489 zsh"
-powershell_indicator = "\uebc7"
-ion_indicator = "\ue66b"
 cmd_indicator = "\uebc4"
+disabled = false
+fish_indicator = "\uee41"
+format = "[$indicator ](fg:font_dark bg:c0)"
+ion_indicator = "\ue66b"
+powershell_indicator = "\uebc7"
 unknown_indicator = "\uf489 ?"
+zsh_indicator = "\uf489 zsh"
 
 [hostname]
-ssh_only = true
-format = "[\ueba9 $hostname ](fg:font_dark bg:c0)"
 disabled = false
+format = "[\ueba9 $hostname ](fg:font_dark bg:c0)"
+ssh_only = true
 
 [username]
-format = "[\uf2c0 $user ](fg:font_dark bg:c0)"
 disabled = false
+format = "[\uf2c0 $user ](fg:font_dark bg:c0)"
 show_always = true
 
 [directory]
@@ -70,19 +70,19 @@ truncation_symbol = "…/"
 
 [time]
 disabled = false
-time_format = "%X"
-style = "bg:#1d2230"
 format = "[\uf43a $time](fg:font_dark bg:c2)"
+style = "bg:#1d2230"
+time_format = "%X"
 
 [cmd_duration]
-min_time = 1
-show_milliseconds=true
 format = "[\uf252 $duration](fg:font_dark bg:c3)"
+min_time = 1
+show_milliseconds = true
 
 # line2-------------------------------------------------------------------------
 [git_branch]
-symbol = "\uf418"
 format = '[$symbol $branch](#ff9e64)'
+symbol = "\uf418"
 
 [git_status]
 format = "[( \uf044  $all_status)( $ahead_behind) ](#ff9e64)"
@@ -93,12 +93,12 @@ diverged = "\uf46a \u21E1${ahead_count} \u21E3${behind_count}"
 up_to_date = "\u2261"
 
 conflicted = "!($count )"
-untracked = '?($count )'
-stashed = '$($count )'
-modified = '~($count )'
-staged = "+($count )"
-renamed = ">($count )"
 deleted = "-($count )"
+modified = '~($count )'
+renamed = ">($count )"
+staged = "+($count )"
+stashed = '$($count )'
+untracked = '?($count )'
 
 [conda]
 format = "[\uec16 $environment ](#9ece6a)"
