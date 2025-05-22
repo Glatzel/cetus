@@ -5,9 +5,7 @@ format = """
 $directory[\ue0b0](fg:c1 bg:c2)\
 $time[\ue0b0](fg:c2 bg:c3)\
 $cmd_duration[\ue0b0](c3)\
-(
-\u251C\u2500\
-$git_branch$git_status\
+( $git_branch$git_status\
 $conda$python\
 )
 \u2570\u2500$character"""
@@ -79,7 +77,6 @@ format = "[\uf252 $duration](fg:font_dark bg:c3)"
 min_time = 1
 show_milliseconds = true
 
-# line2-------------------------------------------------------------------------
 [git_branch]
 format = '[$symbol $branch](#ff9e64)'
 symbol = "\uf418"
