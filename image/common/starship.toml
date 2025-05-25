@@ -5,9 +5,7 @@ format = """
 $directory[\ue0b0](fg:c1 bg:c2)\
 $time[\ue0b0](fg:c2 bg:c3)\
 $cmd_duration[\ue0b0](c3)\
-( $git_branch$git_status\
-$conda$python\
-)
+( $git_branch$git_status)
 \u2570\u2500$character"""
 palette = 'fern'
 
@@ -96,9 +94,3 @@ renamed = ">($count )"
 staged = "+($count )"
 stashed = '$($count )'
 untracked = '?($count )'
-
-[conda]
-format = "[\uec16 $environment ](#9ece6a)"
-
-[python]
-format = "[(\ue235 $version) ](#E5C07B)"
