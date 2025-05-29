@@ -51,7 +51,9 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker image
-      run: docker build -f dev-container/Dockerfile -t glatzel/dev-container:latest .
+      run: |
+        VERSION=$(date "+%Y.%m.%d")
+        docker build -f dev-container/Dockerfile -t "glatzel/dev-container:${VERSION}" .
       working-directory: image
 
     - run: |
@@ -85,14 +87,13 @@ jobs:
         echo "Runner version is ${{ steps.get-version.outputs.version }}"
         docker build -f github-action-runner/Dockerfile \
           --build-arg RUNNER_VERSION=${{ steps.get-version.outputs.version }} \
-          -t glatzel/github-action-runner:latest \
           -t glatzel/github-action-runner:${{ steps.get-version.outputs.version }} \
           .
       working-directory: image
 
     - run: |
         docker images
-        docker history --human --no-trunc glatzel/github-action-runner:latest
+        docker history --human --no-trunc glatzel/github-action-runner:${{ steps.get-version.outputs.version }}
 
     - name: Log in to DockerHub
       if: ${{github.event_name !='pull_request'}}
@@ -103,6 +104,4 @@ jobs:
 
     - name: Push Docker image
       if: ${{github.event_name !='pull_request'}}
-      run: |
-        docker push glatzel/github-action-runner:latest
-        docker push glatzel/github-action-runner:${{ steps.get-version.outputs.version }}
+      run: docker push glatzel/github-action-runner:${{ steps.get-version.outputs.version }}

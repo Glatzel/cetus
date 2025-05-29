@@ -1,6 +1,6 @@
 services:
   runner:
-    image: glatzel/github-action-runner:latest
+    image: glatzel/github-action-runner:2.324.0
     environment:
       - GH_OWNER=${GH_OWNER}
       - GH_REPOSITORY=${GH_REPOSITORY}

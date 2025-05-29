@@ -1,7 +1,7 @@
 services:
   bagetter:
     container_name: bagetter
-    image: bagetter/bagetter:latest
+    image: bagetter/bagetter:1.6
     restart: always
     ports:
       - 8020:8020
