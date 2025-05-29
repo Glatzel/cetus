@@ -6,7 +6,7 @@ Set-Location $PSScriptRoot
 $current_dir = "$PSScriptRoot".Replace("\", "/")
 $exists = docker ps -a --filter "name=playground" --format "{{.Names}}"
 if (-not $exists) {
-    docker run -it -w /root/share -v $current_dir/share:/root/share --name playground glatzel/dev-container:latest $shell
+    docker run -it -w /root/share -v $current_dir/share:/root/share --name playground glatzel/dev-container:2025.05.29 $shell
 }
 else {
     docker start playground
