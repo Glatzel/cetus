@@ -23,8 +23,10 @@ jobs:
       changed-github-action-runner: ${{ steps.main.outputs.github_action_runner_any_changed }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - if: ${{github.event_name =='pull_request'}}
+        uses: actions/checkout@v4
       - id: main
+        if: ${{github.event_name =='pull_request'}}
         uses: tj-actions/changed-files@v46
         with:
           files_yaml: |
