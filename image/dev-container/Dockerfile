@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:24.04
 ARG RUNNER_VERSION
 ENV PATH="/root/.cargo/bin:/root/.pixi/bin:${PATH}"
 

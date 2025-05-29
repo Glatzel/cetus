@@ -1,7 +1,7 @@
 services:
   pypi:
     container_name: pypi
-    image: pypiserver/pypiserver:latest
+    image: pypiserver/pypiserver:v2.3.1
     restart: always
     ports:
       - 8081:8080
