@@ -57,8 +57,9 @@ jobs:
       working-directory: image
 
     - run: |
+        VERSION=$(date "+%Y.%m.%d")
         docker images
-        docker history --human --no-trunc glatzel/dev-container:latest
+        docker history --human --no-trunc "glatzel/dev-container:${VERSION}"
 
     - name: Push Docker image
       if: ${{github.event_name !='pull_request'}}
