@@ -53,7 +53,7 @@ jobs:
     - name: Build Docker image
       run: |
         VERSION=$(date "+%Y.%m.%d")
-        docker build -f dev-container/Dockerfile -t glatzel/dev-container:${VERSION} .
+        docker build -f dev-container/Dockerfile -t "glatzel/dev-container:${VERSION}" .
       working-directory: image
 
     - run: |
