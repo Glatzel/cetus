@@ -2,13 +2,23 @@ param(
     [ValidateSet("pwsh", "bash")]
     $Shell = "pwsh"
 )
+
 Set-Location $PSScriptRoot
-$current_dir = "$PSScriptRoot".Replace("\", "/")
-$exists = docker ps -a --filter "name=playground" --format "{{.Names}}"
-if (-not $exists) {
-    docker run -it -w /root/share -v $current_dir/share:/root/share --name playground glatzel/dev-container:2025.05.29 $shell
+
+# Ensure share directory exists
+if (-not (Test-Path "$PSScriptRoot/share")) {
+    New-Item -ItemType Directory -Path "$PSScriptRoot/share" | Out-Null
 }
-else {
-    docker start playground
+
+$exists = docker ps -a --filter "name=playground" --format "{{.Names}}"
+
+if (-not $exists) {
+    docker compose up -d
+    docker exec -it -w /root/share playground $Shell
+} else {
+    $running = docker ps --filter "name=playground" --format "{{.Names}}"
+    if (-not $running) {
+        docker start playground | Out-Null
+    }
     docker exec -it -w /root/share playground $Shell
 }
