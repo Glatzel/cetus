@@ -1,0 +1,14 @@
+services:
+  playground:
+    image: glatzel/dev-container:2025.05.29
+    container_name: playground
+    working_dir: /root/share
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./share:/root/share
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
