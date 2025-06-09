@@ -1,6 +1,6 @@
 {
   "name": "dev-container",
-  "image": "glatzel/dev-container:2025.06.02",
+  "image": "glatzel/dev-container:2025.06.09",
   "remoteEnv": {
     "HTTP_PROXY": "http://host.docker.internal:10808",
     "HTTPS_PROXY": "http://host.docker.internal:10808",
