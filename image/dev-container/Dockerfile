@@ -22,3 +22,4 @@ RUN echo 'eval "$(starship init bash)"' >> ~/.bashrc
 
 # Clean up APT cache
 RUN rm -rf /var/lib/apt/lists/*
+RUN apt clean
