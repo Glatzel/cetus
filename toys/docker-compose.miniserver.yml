@@ -1,7 +1,7 @@
 services:
   miniserver:
     container_name: miniserver
-    image: svenstaro/miniserve:0.29.0
+    image: svenstaro/miniserve:0.31.0
     restart: no
     ports:
       - 8080:8080
