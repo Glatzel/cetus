@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - if: ${{github.event_name =='pull_request'||github.event_name =='push'}}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - id: main
         if: ${{github.event_name =='pull_request'||github.event_name =='push'}}
         uses: tj-actions/changed-files@v46
@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Log in to DockerHub
       uses: docker/login-action@v3
@@ -74,7 +74,7 @@ jobs:
     if: ${{ needs.changed.outputs.changed-github-action-runner != 'false' }}
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
 
 
