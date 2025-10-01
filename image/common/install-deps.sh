@@ -8,7 +8,6 @@ apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
     git \
-    libsqlite3-dev \
     wget
 
 apt-get clean
