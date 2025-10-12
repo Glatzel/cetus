@@ -982,7 +982,6 @@ packages:
   constrains:
   - __glibc >=2.17
   license: MIT
-  license_family: MIT
   size: 11084173
   timestamp: 1759875841049
 - conda: https://conda.anaconda.org/conda-forge/win-64/ruff-0.14.0-h3e3edff_0.conda
@@ -995,7 +994,6 @@ packages:
   - vc14_runtime >=14.44.35208
   - ucrt >=10.0.20348.0
   license: MIT
-  license_family: MIT
   size: 11364192
   timestamp: 1759875876595
 - conda: https://conda.anaconda.org/conda-forge/noarch/snowballstemmer-3.0.1-pyhd8ed1ab_0.conda
