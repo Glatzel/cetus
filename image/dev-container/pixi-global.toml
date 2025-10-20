@@ -1,7 +1,7 @@
 version = 1
 
 [envs.dev-tool]
-channels = ["conda-forge", "https://repo.prefix.dev/glatzel"]
+channels = ["conda-forge", "https://prefix.dev/glatzel"]
 
 [envs.dev-tool.dependencies]
 aria2 = "*"
