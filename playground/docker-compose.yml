@@ -1,6 +1,6 @@
 services:
   playground:
-    image: glatzel/dev-container:2025.10.20
+    image: glatzel/dev-container:2025.11.01
     container_name: playground
     working_dir: /root/share
     stdin_open: true
