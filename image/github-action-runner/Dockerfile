@@ -11,13 +11,6 @@ COPY --chown=runner:runner ./github-action-runner/pixi-global.toml /home/runner/
 RUN pixi global update base-ci
 RUN pixi clean cache -y
 
-# install rust
-RUN curl https://sh.rustup.rs -sSf | bash -s -- -y --profile minimal --default-toolchain stable
-RUN ~/.cargo/bin/rustup component add clippy --toolchain stable
-RUN ~/.cargo/bin/rustup toolchain install nightly --profile=minimal
-RUN ~/.cargo/bin/rustup component add rustfmt --toolchain nightly
-RUN ~/.cargo/bin/rustup default stable
-
 USER root
 
 # GitHub Actions Runner Installation
