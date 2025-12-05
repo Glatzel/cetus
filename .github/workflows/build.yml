@@ -83,12 +83,12 @@ jobs:
         run: |
           echo "Runner version is ${{ steps.get-version.outputs.version }}"
           sudo systemctl enable --now containerd
-          sudo nerdctl build -f github-action-runner/Dockerfile \
+          sudo ~/.pixi/bin/nerdctl build -f github-action-runner/Dockerfile \
             --build-arg RUNNER_VERSION=${{ steps.get-version.outputs.version }} \
             -t glatzel/github-action-runner:${{ steps.get-version.outputs.version }} \
             .
         working-directory: image
 
       - run: |
-          sudo nerdctl images
-          sudo nerdctl history --human --no-trunc glatzel/github-action-runner:${{ steps.get-version.outputs.version }}
+          sudo ~/.pixi/bin/nerdctl images
+          sudo ~/.pixi/bin/nerdctl history --human --no-trunc glatzel/github-action-runner:${{ steps.get-version.outputs.version }}
