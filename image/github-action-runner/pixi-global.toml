@@ -19,6 +19,7 @@ pkg-config = "*"     # Helper tool for compiling applications and libraries
 powershell = "*"     # Cross-platform automation and configuration tool
 ruff = "*"           # Fast Python linter
 wget = "*"           # Network downloader
+yq = "*"             # YAML processor
 zstd = "*"           # Zstandard compression
 
 [envs.base-conda.exposed]
@@ -37,4 +38,5 @@ pkg-config = "pkg-config"
 pwsh = "pwsh"
 ruff = "ruff"
 wget = "wget"
+yq = "yq"
 zstd = "zstd"
