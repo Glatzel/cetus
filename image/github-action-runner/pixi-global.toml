@@ -1,7 +1,7 @@
-[envs.base-ci]
+[envs.base]
 channels = ["conda-forge"]
 platform = "linux-64"
-[envs.base-conda.dependencies]
+[envs.base.dependencies]
 aria2 = "*"          # CLI download manager
 cmake = "*"          # Build system
 curl = "*"           # Command line tool for transferring data with URLs
@@ -16,7 +16,7 @@ powershell = "*"     # Cross-platform automation and configuration tool
 wget = "*"           # Network downloader
 zstd = "*"           # Zstandard compression
 
-[envs.base-ci.exposed]
+[envs.base.exposed]
 7z = "7z"
 aria2 = "aria2c"
 cmake = "cmake"
