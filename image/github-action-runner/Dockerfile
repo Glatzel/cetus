@@ -1,11 +1,7 @@
-FROM ubuntu:latest
+FROM debian:trixie
 ARG RUNNER_VERSION
 ENV PATH="/home/runner/.cargo/bin:/home/runner/.pixi/bin:${PATH}"
 RUN useradd -m runner
-
-# Update and install common dependencies
-COPY ../common/install-deps.sh /tmp/install-deps.sh
-RUN bash /tmp/install-deps.sh
 
 USER runner
 
