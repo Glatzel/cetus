@@ -3,8 +3,6 @@ channels = ["conda-forge"]
 platform = "linux-64"
 [envs.base-conda.dependencies]
 aria2 = "*"          # CLI download manager
-cargo-llvm-cov = "*" # LLVM coverage for Cargo
-cargo-nextest = "*"  # Next-generation test runner for Rust
 cmake = "*"          # Build system
 curl = "*"           # Command line tool for transferring data with URLs
 gh = "*"             # GitHub CLI
@@ -22,10 +20,8 @@ zstd = "*"           # Zstandard compression
 [envs.base-ci.exposed]
 7z = "7z"
 aria2 = "aria2c"
-cargo-llvm-cov = "cargo-llvm-cov"
-cargo-nextest = "cargo-nextest"
 cmake = "cmake"
-curl = "*"
+curl = "curl"
 gh = "gh"
 git = "git"
 git-cliff = "git-cliff"
