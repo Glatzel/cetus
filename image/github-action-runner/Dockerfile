@@ -1,22 +1,15 @@
-FROM ubuntu:latest
+FROM debian:trixie
 ARG RUNNER_VERSION
-ENV PATH="/home/runner/.cargo/bin:/home/runner/.pixi/bin:${PATH}"
+ENV PATH="/home/runner/.pixi/bin:${PATH}"
 RUN useradd -m runner
-
-# Update and install common dependencies
-COPY ../common/install-deps.sh /tmp/install-deps.sh
-RUN bash /tmp/install-deps.sh
-
+RUN apt update && apt install -y --no-install-recommends curl ca-certificates && apt-get clean
 USER runner
 
 # install pixi
 COPY --chown=runner:runner ./github-action-runner/pixi-global.toml /home/runner/.pixi/manifests/pixi-global.toml
-COPY ./common/install-pixi.sh /home/runner/tmp/install-pixi.sh
-RUN bash ~/tmp/install-pixi.sh
-
-# install rust
-COPY ./common/install-rust.sh /home/runner/tmp/install-rust.sh
-RUN bash ~/tmp/install-rust.sh
+RUN curl -fsSL https://pixi.sh/install.sh | bash && \
+    pixi global update base && \
+    pixi clean cache -y
 
 USER root
 

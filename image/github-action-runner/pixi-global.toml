@@ -1,34 +1,32 @@
-version = 1
-
-[envs.dev-tool]
+[envs.base]
 channels = ["conda-forge"]
+platform = "linux-64"
+[envs.base.dependencies]
+aria2 = "*"          # CLI download manager
+cmake = "*"          # Build system
+curl = "*"           # Command line tool for transferring data with URLs
+gh = "*"             # GitHub CLI
+git = "*"            # version control
+go-yq = "*"          # YAML processor
+imagemagick = "*"    # Image processing
+jq = "*"             # JSON processor
+p7zip = "*"          # 7-Zip file archiver
+pkg-config = "*"     # Helper tool for compiling applications and libraries
+powershell = "*"     # Cross-platform automation and configuration tool
+wget = "*"           # Network downloader
+zstd = "*"           # Zstandard compression
 
-[envs.dev-tool.dependencies]
-aria2 = "*"
-cargo-llvm-cov = "*"
-cargo-nextest = "*"
-cmake = "*"
-gh = "*"
-git-cliff = "*"
-jq = "*"
-nomkl = "*"
-p7zip = "*"
-pkg-config = "*"
-powershell = "*"
-python = "3.13.*"
-ruff = "*"
-zstd = "*"
-
-[envs.dev-tool.exposed]
+[envs.base.exposed]
 7z = "7z"
 aria2 = "aria2c"
-cargo-llvm-cov = "cargo-llvm-cov"
-cargo-nextest = "cargo-nextest"
 cmake = "cmake"
+curl = "curl"
 gh = "gh"
-git-cliff = "git-cliff"
+git = "git"
 jq = "jq"
+magick = "magick"
 pkg-config = "pkg-config"
 pwsh = "pwsh"
-ruff = "ruff"
+wget = "wget"
+yq = "yq"
 zstd = "zstd"
