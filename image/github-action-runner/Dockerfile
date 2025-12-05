@@ -1,6 +1,6 @@
 FROM debian:trixie
 ARG RUNNER_VERSION
-ENV PATH="/home/runner/.cargo/bin:/home/runner/.pixi/bin:${PATH}"
+ENV PATH=/home/runner/.pixi/bin:${PATH}"
 RUN useradd -m runner
 
 USER runner
