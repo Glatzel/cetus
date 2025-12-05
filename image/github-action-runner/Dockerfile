@@ -2,8 +2,7 @@ FROM debian:trixie
 ARG RUNNER_VERSION
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
 RUN useradd -m runner
-RUN apt update && apt install -y --no-install-recommends curl ca-certificates 
-&& apt-get clean
+RUN apt update && apt install -y --no-install-recommends curl ca-certificates && apt-get clean
 USER runner
 
 # install pixi
