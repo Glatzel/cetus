@@ -6,10 +6,10 @@ RUN useradd -m runner
 USER runner
 
 # install pixi
-RUN curl -fsSL https://pixi.sh/install.sh | bash
 COPY --chown=runner:runner ./github-action-runner/pixi-global.toml /home/runner/.pixi/manifests/pixi-global.toml
-RUN pixi global update base
-RUN pixi clean cache -y
+RUN curl -fsSL https://pixi.sh/install.sh | bash && \
+    pixi global update base && \
+    pixi clean cache -y
 
 USER root
 
