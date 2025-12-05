@@ -33,30 +33,62 @@ jobs:
               - ./image/common/**
               - ./image/github-action-runner/**
 
-
-  github-action-runner:
+  github-action-runner-docker:
     runs-on: ubuntu-latest
     needs: changed
     if: ${{ needs.changed.outputs.changed-github-action-runner != 'false' }}
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v5
+      - name: Checkout code
+        uses: actions/checkout@v5
 
-    - id: get-version
-      env:
-        GH_TOKEN: ${{ github.token }}
-      run: ./image/github-action-runner/get-runner-version.ps1
-      shell: pwsh
+      - id: get-version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ./image/github-action-runner/get-runner-version.ps1
+        shell: pwsh
 
-    - name: Build Docker image
-      run: |
-        echo "Runner version is ${{ steps.get-version.outputs.version }}"
-        docker build -f github-action-runner/Dockerfile \
-          --build-arg RUNNER_VERSION=${{ steps.get-version.outputs.version }} \
-          -t glatzel/github-action-runner:${{ steps.get-version.outputs.version }} \
-          .
-      working-directory: image
+      - name: Build Docker image
+        run: |
+          echo "Runner version is ${{ steps.get-version.outputs.version }}"
+          docker build -f github-action-runner/Dockerfile \
+            --build-arg RUNNER_VERSION=${{ steps.get-version.outputs.version }} \
+            -t glatzel/github-action-runner:${{ steps.get-version.outputs.version }} \
+            .
+        working-directory: image
 
-    - run: |
-        docker images
-        docker history --human --no-trunc glatzel/github-action-runner:${{ steps.get-version.outputs.version }}
+      - run: |
+          docker images
+          docker history --human --no-trunc glatzel/github-action-runner:${{ steps.get-version.outputs.version }}
+  github-action-runner-containerd:
+    runs-on: ubuntu-latest
+    needs: changed
+    if: ${{ needs.changed.outputs.changed-github-action-runner != 'false' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - id: get-version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ./image/github-action-runner/get-runner-version.ps1
+        shell: pwsh
+
+      - name: Set up pixi
+        uses: prefix-dev/setup-pixi@main
+        with:
+          run-install: false
+      - run: pixi global install -c https://prefix.dev/glatzel containerd nerdctl
+
+      - name: Build Docker image
+        run: |
+          echo "Runner version is ${{ steps.get-version.outputs.version }}"
+          sudo systemctl start containerd
+          nerdctl build -f github-action-runner/Dockerfile \
+            --build-arg RUNNER_VERSION=${{ steps.get-version.outputs.version }} \
+            -t glatzel/github-action-runner:${{ steps.get-version.outputs.version }} \
+            .
+        working-directory: image
+
+      - run: |
+          nerdctl images
+          nerdctl history --human --no-trunc glatzel/github-action-runner:${{ steps.get-version.outputs.version }}
