@@ -7,4 +7,4 @@ docker build -f ./Dockerfile `
     --build-arg RUNNER_VERSION=$version `
     -t $tag `
     .
-"tag=$matrix" >> $env:GITHUB_OUTPUT
+"tag=$tag" >> $env:GITHUB_OUTPUT
