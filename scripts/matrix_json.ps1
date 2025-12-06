@@ -23,7 +23,7 @@ switch ($env:GITHUB_EVENT_NAME) {
         $matrix = $matrix | jq -c --argjson images "${env:CHANGED_KEYS}" '{include: .include | map(select(.image as $p | $images | index($p)))}'
     }
     default {
-        $matrix = $matrix | jq -c '{include: .include | map(.machine = "ubuntu-latest") | group_by(.image) | map(.[0])}'
+        $matrix = $matrix
     }
 }
 
