@@ -43,6 +43,11 @@ jobs:
         shell: pwsh
 
   build-and-push:
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
     needs: dispatch
     strategy:
       fail-fast: false
