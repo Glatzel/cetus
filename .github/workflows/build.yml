@@ -80,7 +80,7 @@ jobs:
         if: inputs.publish
         uses: docker/login-action@v3
         with:
-          username: ${{ github.actor }}
+          username: glatzel
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push Docker image
