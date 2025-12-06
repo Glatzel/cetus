@@ -60,12 +60,12 @@ jobs:
           docker images
           docker history --human --no-trunc glatzel/github-action-runner:${{ steps.get-version.outputs.version }}
 
-      - name: Log in to DockerHub
-        if: ${{github.event_name !='pull_request'}}
-        uses: docker/login-action@v3
-        with:
-          username: glatzel
-          password: ${{ secrets.DOCKER_PASSWORD }}
+      # - name: Log in to DockerHub
+      #   if: ${{github.event_name !='pull_request'}}
+      #   uses: docker/login-action@v3
+      #   with:
+      #     username: glatzel
+      #     password: ${{ secrets.DOCKER_PASSWORD }}
 
       # - name: Push Docker image
       #   if: ${{github.event_name !='pull_request'}}
@@ -82,5 +82,4 @@ jobs:
       - name: Push Docker image to ghcr
         if: ${{github.event_name !='pull_request'}}
         run: 
-          tag my-image ghcr.io/myusername/my-custom-repo:latest
           docker push glatzel/github-action-runner:${{ steps.get-version.outputs.version }}
