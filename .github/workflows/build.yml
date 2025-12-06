@@ -87,4 +87,5 @@ jobs:
       - name: Push Docker image to ghcr
         if: ${{github.event_name !='pull_request'}}
         run: |
-          docker push ${{steps.build.outputs.tag}}
+          docker tag ${{steps.build.outputs.tag}} ghcr.io/${{steps.build.outputs.tag}}
+          docker push ghcr.io/${{steps.build.outputs.tag}}
