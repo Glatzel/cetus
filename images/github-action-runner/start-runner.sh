@@ -1,5 +1,5 @@
 #!/bin/bash
-pixi global update
+pixi global update -vv
 GH_OWNER=$GH_OWNER
 GH_REPOSITORY=$GH_REPOSITORY
 GH_TOKEN=$GH_TOKEN
