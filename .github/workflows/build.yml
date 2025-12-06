@@ -17,48 +17,43 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  changed:
-    outputs:
-      changed-github-action-runner: ${{ steps.main.outputs.github_action_runner_any_changed }}
-    runs-on: ubuntu-latest
-    steps:
-      - if: ${{github.event_name =='pull_request'||github.event_name =='push'}}
-        uses: actions/checkout@v5
-      - id: main
-        if: ${{github.event_name =='pull_request'||github.event_name =='push'}}
-        uses: tj-actions/changed-files@v47
-        with:
-          files_yaml: |
-            github_action_runner:
-              - ./image/common/**
-              - ./image/github-action-runner/**
+  # changed:
+  #   outputs:
+  #     changed-github-action-runner: ${{ steps.main.outputs.github_action_runner_any_changed }}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - if: ${{github.event_name =='pull_request'||github.event_name =='push'}}
+  #       uses: actions/checkout@v5
+  #     - id: main
+  #       if: ${{github.event_name =='pull_request'||github.event_name =='push'}}
+  #       uses: tj-actions/changed-files@v47
+  #       with:
+  #         files_yaml: |
+  #           github_action_runner:
+  #             - ./image/common/**
+  #             - ./image/github-action-runner/**
 
-  github-action-runner:
+  build-and-push:
+    strategy:
+      matrix:
+        image-name: [github-action-runner]
+      fail-fast: false
     runs-on: ubuntu-latest
-    needs: changed
-    if: ${{ needs.changed.outputs.changed-github-action-runner != 'false' }}
+    # needs: changed
+    # if: ${{ needs.changed.outputs.changed-github-action-runner!= 'false' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      - id: get-version
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: ./image/github-action-runner/get-runner-version.ps1
-        shell: pwsh
-
       - name: Build Docker image
-        run: |
-          echo "Runner version is ${{ steps.get-version.outputs.version }}"
-          docker build -f github-action-runner/Dockerfile \
-            --build-arg RUNNER_VERSION=${{ steps.get-version.outputs.version }} \
-            -t ${{ github.actor }}/github-action-runner:${{ steps.get-version.outputs.version }} \
-            .
-        working-directory: image
+        id: build
+        run: build.ps1
+        working-directory: images/${{matrix.image-name}}
+        shell: pwsh
 
       - run: |
           docker images
-          docker history --human --no-trunc ${{ github.actor }}/github-action-runner:${{ steps.get-version.outputs.version }}
+          docker history --human --no-trunc ${{steps.build.outputs.tag}}
 
       # - name: Log in to DockerHub
       #   if: ${{github.event_name !='pull_request'}}
@@ -69,7 +64,7 @@ jobs:
 
       # - name: Push Docker image
       #   if: ${{github.event_name !='pull_request'}}
-      #   run: docker push ${{ github.actor }}/github-action-runner:${{ steps.get-version.outputs.version }}
+      #   run: docker push ${{steps.build.outputs.tag}}
 
       - name: Log in to ghcr
         if: ${{github.event_name !='pull_request'}}
@@ -81,5 +76,4 @@ jobs:
 
       - name: Push Docker image to ghcr
         if: ${{github.event_name !='pull_request'}}
-        run: 
-          docker push Glatzel/github-action-runner:${{ steps.get-version.outputs.version }}
+        run: docker push ${{steps.build.outputs.tag}}
