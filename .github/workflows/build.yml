@@ -60,7 +60,8 @@ jobs:
         working-directory: images/${{matrix.image}}
         shell: pwsh
 
-      - run: |
+      - name: inspect Docker image
+        run: |
           docker images
           docker history --human --no-trunc ${{steps.build.outputs.tag}}
 
