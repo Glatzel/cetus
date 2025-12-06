@@ -7,9 +7,7 @@ USER runner
 
 # install pixi
 COPY --chown=runner:runner ./github-action-runner/pixi-global.toml /home/runner/.pixi/manifests/pixi-global.toml
-RUN curl -fsSL https://pixi.sh/install.sh | bash && \
-    pixi global update base && \
-    pixi clean cache -y
+RUN curl -fsSL https://pixi.sh/install.sh | bash
 
 USER root
 
