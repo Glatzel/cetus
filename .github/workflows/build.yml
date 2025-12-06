@@ -53,6 +53,8 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Build Docker image
+        env:
+          GH_TOKEN: ${{ github.token }}
         id: build
         run: ./build.ps1
         working-directory: images/${{matrix.image}}
