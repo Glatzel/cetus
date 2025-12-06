@@ -52,24 +52,24 @@ jobs:
           echo "Runner version is ${{ steps.get-version.outputs.version }}"
           docker build -f github-action-runner/Dockerfile \
             --build-arg RUNNER_VERSION=${{ steps.get-version.outputs.version }} \
-            -t Glatzel/github-action-runner:${{ steps.get-version.outputs.version }} \
+            -t ${{ github.actor }}/github-action-runner:${{ steps.get-version.outputs.version }} \
             .
         working-directory: image
 
       - run: |
           docker images
-          docker history --human --no-trunc Glatzel/github-action-runner:${{ steps.get-version.outputs.version }}
+          docker history --human --no-trunc ${{ github.actor }}/github-action-runner:${{ steps.get-version.outputs.version }}
 
       # - name: Log in to DockerHub
       #   if: ${{github.event_name !='pull_request'}}
       #   uses: docker/login-action@v3
       #   with:
-      #     username: glatzel
+      #     username: ${{ github.actor }}
       #     password: ${{ secrets.DOCKER_PASSWORD }}
 
       # - name: Push Docker image
       #   if: ${{github.event_name !='pull_request'}}
-      #   run: docker push glatzel/github-action-runner:${{ steps.get-version.outputs.version }}
+      #   run: docker push ${{ github.actor }}/github-action-runner:${{ steps.get-version.outputs.version }}
 
       - name: Log in to ghcr
         if: ${{github.event_name !='pull_request'}}
