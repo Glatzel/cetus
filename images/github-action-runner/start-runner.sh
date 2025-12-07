@@ -1,11 +1,4 @@
 #!/bin/bash
-if command -v pixi >/dev/null 2>&1; then
-    echo "[INFO] pixi already installed."
-    pixi self-update
-else
-    echo "[INFO] pixi not found. Installing..."
-    curl -fsSL https://pixi.sh/install.sh | sh
-fi
 pixi global update -vv
 
 GH_OWNER=$GH_OWNER

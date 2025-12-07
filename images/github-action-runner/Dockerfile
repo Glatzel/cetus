@@ -5,8 +5,9 @@ RUN useradd -m runner
 RUN apt update && apt install -y --no-install-recommends curl ca-certificates && apt-get clean
 USER runner
 
-# copy pixi global config
+# install pixi
 COPY --chown=runner:runner ./pixi-global.toml /home/runner/.pixi/manifests/pixi-global.toml
+RUN curl -fsSL https://pixi.sh/install.sh | bash
 
 USER root
 
