@@ -2,19 +2,19 @@
 channels = ["conda-forge"]
 platform = "linux-64"
 [envs.base.dependencies]
-aria2 = "*"          # CLI download manager
-cmake = "*"          # Build system
-curl = "*"           # Command line tool for transferring data with URLs
-gh = "*"             # GitHub CLI
-git = "*"            # version control
-go-yq = "*"          # YAML processor
-imagemagick = "*"    # Image processing
-jq = "*"             # JSON processor
-p7zip = "*"          # 7-Zip file archiver
-pkg-config = "*"     # Helper tool for compiling applications and libraries
-powershell = "*"     # Cross-platform automation and configuration tool
-wget = "*"           # Network downloader
-zstd = "*"           # Zstandard compression
+aria2 = "*"       # CLI download manager
+cmake = "*"       # Build system
+curl = "*"        # Command line tool for transferring data with URLs
+gh = "*"          # GitHub CLI
+git = "*"         # version control
+go-yq = "*"       # YAML processor
+imagemagick = "*" # Image processing
+jq = "*"          # JSON processor
+p7zip = "*"       # 7-Zip file archiver
+pkg-config = "*"  # Helper tool for compiling applications and libraries
+powershell = "*"  # Cross-platform automation and configuration tool
+wget = "*"        # Network downloader
+zstd = "*"        # Zstandard compression
 
 [envs.base.exposed]
 7z = "7z"
