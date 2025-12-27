@@ -11,7 +11,7 @@ ForEach ($img in Get-ChildItem $PSScriptRoot/../images) {
     }
 }
 
-
+  
 $matrix = $matrix |
 ConvertTo-Json -Depth 10 -Compress |
 jq '{include: [.]}'
