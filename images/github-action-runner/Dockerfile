@@ -30,8 +30,6 @@ USER runner
 # install pixi
 COPY --chown=runner:runner ./pixi-global.toml /home/runner/.pixi/manifests/pixi-global.toml
 RUN curl -fsSL https://pixi.sh/install.sh | bash
-RUN pixi global update
-RUN pixi clean cache -y
 
 # set the entrypoint to the start.sh script
 ENTRYPOINT ["./start-runner.sh"]
