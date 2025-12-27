@@ -1,4 +1,4 @@
-FROM debian:trixie
+FROM debian:10
 ARG RUNNER_VERSION
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
 RUN useradd -m runner
