@@ -7,7 +7,7 @@ RUN apt autoclean
 RUN apt autoremove -y
 
 # install pixi
-COPY --chown=runner:runner ./pixi-global.toml ~/.pixi/manifests/pixi-global.toml
+COPY ./pixi-global.toml /root/.pixi/manifests/pixi-global.toml
 RUN curl -fsSL https://pixi.sh/install.sh | bash
 RUN pixi global update
 RUN pixi clean cache -y
