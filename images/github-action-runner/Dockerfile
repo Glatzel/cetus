@@ -1,16 +1,10 @@
-FROM debian:trixie
+FROM debian:11
 ARG RUNNER_VERSION
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
 RUN useradd -m runner
 RUN apt update && apt install -y --no-install-recommends curl ca-certificates && apt-get clean
-USER runner
-
-# install pixi
-COPY --chown=runner:runner ./pixi-global.toml /home/runner/.pixi/manifests/pixi-global.toml
-RUN curl -fsSL https://pixi.sh/install.sh | bash
 
 USER root
-
 # GitHub Actions Runner Installation
 RUN cd /home/runner && mkdir actions-runner && cd actions-runner && \
     curl -O -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
@@ -33,6 +27,9 @@ RUN apt autoclean
 RUN apt autoremove -y
 
 USER runner
+# install pixi
+COPY --chown=runner:runner ./pixi-global.toml /home/runner/.pixi/manifests/pixi-global.toml
+RUN curl -fsSL https://pixi.sh/install.sh | bash
 
 # set the entrypoint to the start.sh script
 ENTRYPOINT ["./start-runner.sh"]

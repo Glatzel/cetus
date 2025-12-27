@@ -1,9 +1,12 @@
 $matrix = @()
-
+$machine_map = @{
+    "github-action-runner" = "ubuntu-latest"
+}
 ForEach ($img in Get-ChildItem $PSScriptRoot/../images) {
     $img = $img.Name
     $matrix += [PSCustomObject]@{
-        image = $img
+        image   = $img
+        machine = $machine_map[$img]
     }
 }
 
