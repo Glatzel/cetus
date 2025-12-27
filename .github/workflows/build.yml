@@ -69,28 +69,3 @@ jobs:
         run: |
           docker images
           docker history --human --no-trunc ${{steps.build.outputs.tag}}
-
-      - name: Log in to DockerHub
-        if: inputs.publish
-        uses: docker/login-action@v3
-        with:
-          username: glatzel
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Push Docker image
-        if: inputs.publish
-        run: docker push ${{steps.build.outputs.tag}}
-
-      - name: Log in to ghcr
-        if: inputs.publish
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ github.token }}
-
-      - name: Push Docker image to ghcr
-        if: inputs.publish
-        run: |
-          docker tag ${{steps.build.outputs.tag}} ghcr.io/${{steps.build.outputs.tag}}
-          docker push ghcr.io/${{steps.build.outputs.tag}}
