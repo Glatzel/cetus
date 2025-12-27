@@ -11,7 +11,7 @@ ForEach ($img in Get-ChildItem $PSScriptRoot/../images) {
     }
 }
 
-$matrix = $matrix | ConvertTo-Json -Depth 10 -Compress | jq '{include: [.]}'
+$matrix = $matrix | ConvertTo-Json -Depth 10 -Compress | jq '{include: .}'
 # Clean CHANGED_KEYS
 $env:CHANGED_KEYS = "${env:CHANGED_KEYS}".Replace("\", "")
 write-output $env:CHANGED_KEYS
