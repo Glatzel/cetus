@@ -28,8 +28,8 @@ write-output $matrix
 #}
 
 # Output matrix to GitHub Actions
-"matrix=$matrix" >> $env:GITHUB_OUTPUT
+#"matrix=$matrix" >> $env:GITHUB_OUTPUT
 
-Write-Output "::group::json"
-$matrix | jq .
-Write-Output "::endgroup::"
+#Write-Output "::group::json"
+#$matrix | jq .
+#Write-Output "::endgroup::"
