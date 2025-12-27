@@ -12,6 +12,7 @@ ForEach ($img in Get-ChildItem $PSScriptRoot/../images) {
 }
 
 $matrix = $matrix | ConvertTo-Json -Depth 10 -Compress | jq '{include: [.]}'
+write-output $matrix
 # Clean CHANGED_KEYS
 $env:CHANGED_KEYS = "${env:CHANGED_KEYS}".Replace("\", "")
 switch ($env:GITHUB_EVENT_NAME) {
