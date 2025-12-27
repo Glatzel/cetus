@@ -37,7 +37,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         id: build
         run: ./build.ps1
-        working-directory: images/${{matrix.image}}
+        working-directory: images/${{inputs.name}}
         shell: pwsh
 
       - name: inspect Docker image
