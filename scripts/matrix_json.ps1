@@ -1,23 +1,19 @@
 $matrix = @()
 $machine_map = @{
-    "github-action-runner" = "ubuntu-latest"
+    'github-action-runner' = 'ubuntu-latest'
+'ghar-linux' = 'ubuntu-latest'
 }
 ForEach ($img in Get-ChildItem $PSScriptRoot/../images) {
-    $img = $img.Name
+    $img=$img.Name
     $matrix += [PSCustomObject]@{
         image   = $img
-        machine = $machine_map[$img]
+        machine = $machine_map["$img"]
     }
 }
 
-
-$matrix = $matrix |
-ConvertTo-Json -Depth 10 -Compress |
-jq '{include: [.]}'
-
+$matrix = $matrix | ConvertTo-Json -Depth 10 -Compress | jq '{include: .}'
 # Clean CHANGED_KEYS
 $env:CHANGED_KEYS = "${env:CHANGED_KEYS}".Replace("\", "")
-
 switch ($env:GITHUB_EVENT_NAME) {
     "push" {
         $matrix = $matrix | jq -c --argjson images "${env:CHANGED_KEYS}" '{include: .include | map(select(.image as $p | $images | index($p)))}'
