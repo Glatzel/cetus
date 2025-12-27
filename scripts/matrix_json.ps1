@@ -1,7 +1,7 @@
 $matrix = @()
 $machine_map = @{
-    "github-action-runner" = "ubuntu-latest"
-"ghar-linux" = "ubuntu-latest"
+    'github-action-runner' = 'ubuntu-latest'
+'ghar-linux' = 'ubuntu-latest'
 }
 ForEach ($img in Get-ChildItem $PSScriptRoot/../images) {
     $img = $img.Name
