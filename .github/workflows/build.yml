@@ -42,7 +42,7 @@ jobs:
         run: ./scripts/matrix_json.ps1
         shell: pwsh
 
-  build-and-push:
+  build:
     permissions:
       contents: read
       packages: write

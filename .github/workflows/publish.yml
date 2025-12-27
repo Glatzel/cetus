@@ -54,11 +54,11 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker tag ${{inputs.name}} "${{ github.actor }}/${{inputs.name}}:${{steps.build.outputs.version}}"
-          docker push ${{ github.actor }}/${{inputs.name}}:${{steps.build.outputs.version}}
+          docker tag ${{inputs.name}} glatzel/${{inputs.name}}:${{steps.build.outputs.version}}
+          docker push glatzel/${{inputs.name}}:${{steps.build.outputs.version}}
 
-          docker tag ${{inputs.name}} ${{ github.actor }}/${{inputs.name}}:latest
-          docker push ${{ github.actor }}/${{inputs.name}}:latest
+          docker tag ${{inputs.name}} glatzel/${{inputs.name}}:latest
+          docker push glatzel/${{inputs.name}}:latest
         shell: pwsh
 
       - name: Log in to ghcr
@@ -70,9 +70,9 @@ jobs:
 
       - name: Push Docker image to ghcr
         run: |
-          docker tag ${{inputs.name}} ghcr.io/${{ github.actor }}/${{inputs.name}}:${{steps.build.outputs.version}}
-          docker push ghcr.io/${{ github.actor }}/${{inputs.name}}:${{steps.build.outputs.version}}
+          docker tag ${{inputs.name}} ghcr.io/glatzel/${{inputs.name}}:${{steps.build.outputs.version}}
+          docker push ghcr.io/glatzel/${{inputs.name}}:${{steps.build.outputs.version}}
 
-          docker tag ${{inputs.name}} ghcr.io/${{ github.actor }}/${{inputs.name}}:latest
-          docker push ghcr.io/${{ github.actor }}/${{inputs.name}}:latest
+          docker tag ${{inputs.name}} ghcr.io/glatzel/${{inputs.name}}:latest
+          docker push ghcr.io/glatzel/${{inputs.name}}:latest
         shell: pwsh
