@@ -58,7 +58,7 @@ jobs:
 
           $image = "${{ steps.build.outputs.tag }}"
           $base = $image.Split(":")[0]
-          docker tag $image "$base:latest"
+          docker tag $image "$base`:latest"
           docker push "$base`:latest"
         shell: pwsh
 
@@ -76,6 +76,6 @@ jobs:
 
           $image = "${{ steps.build.outputs.tag }}"
           $base = $image.Split(":")[0]
-          docker tag ${{steps.build.outputs.tag}} ghcr.io/$base:latest
+          docker tag ${{steps.build.outputs.tag}} "ghcr.io/$base`:latest"
           docker push "$base`:latest"
         shell: pwsh
