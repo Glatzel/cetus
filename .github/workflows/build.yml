@@ -68,4 +68,4 @@ jobs:
       - name: inspect Docker image
         run: |
           docker images
-          docker history --human --no-trunc ${{steps.build.outputs.tag}}
+          docker history --human --no-trunc ${{matrix.image}}

@@ -43,7 +43,7 @@ jobs:
       - name: inspect Docker image
         run: |
           docker images
-          docker history --human --no-trunc ${{steps.build.outputs.tag}}
+          docker history --human --no-trunc ${{inputs.name}}
 
       - name: Log in to DockerHub
 
@@ -54,12 +54,11 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker push ${{steps.build.outputs.tag}}
+          docker tag ${{inputs.name}} "${{ github.actor }}/${{inputs.name}}:${{steps.build.outputs.version}}"
+          docker push ${{ github.actor }}/${{inputs.name}}:${{steps.build.outputs.version}}
 
-          $image = "${{ steps.build.outputs.tag }}"
-          $base = $image.Split(":")[0]
-          docker tag $image "$base`:latest"
-          docker push "$base`:latest"
+          docker tag ${{inputs.name}} ${{ github.actor }}/${{inputs.name}}:latest
+          docker push ${{ github.actor }}/${{inputs.name}}:latest
         shell: pwsh
 
       - name: Log in to ghcr
@@ -71,11 +70,9 @@ jobs:
 
       - name: Push Docker image to ghcr
         run: |
-          docker tag ${{steps.build.outputs.tag}} ghcr.io/${{steps.build.outputs.tag}}
-          docker push ghcr.io/${{steps.build.outputs.tag}}
+          docker tag ${{inputs.name}} ghcr.io/${{ github.actor }}/${{inputs.name}}:${{steps.build.outputs.version}}
+          docker push ghcr.io/${{ github.actor }}/${{inputs.name}}:${{steps.build.outputs.version}}
 
-          $image = "${{ steps.build.outputs.tag }}"
-          $base = $image.Split(":")[0]
-          docker tag ${{steps.build.outputs.tag}} "ghcr.io/$base`:latest"
-          docker push "$base`:latest"
+          docker tag ${{inputs.name}} ghcr.io/${{ github.actor }}/${{inputs.name}}:latest
+          docker push ghcr.io/${{ github.actor }}/${{inputs.name}}:latest
         shell: pwsh
