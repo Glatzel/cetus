@@ -1,15 +1,17 @@
 $matrix = @()
-$machine_map = @{
-    'github-action-runner' = 'ubuntu-latest'
-'ghar-linux' = 'ubuntu-latest'
-}
-ForEach ($img in Get-ChildItem $PSScriptRoot/../images) {
-    $img=$img.Name
-    $matrix += [PSCustomObject]@{
-        image   = $img
-        machine = $machine_map["$img"]
+$csvData = Import-Csv "$PSScriptRoot/../images.csv"
+foreach ($row in $csvData) {
+    $img = $row.img
+    foreach ($machine in "windows-latest", "macos-latest", "ubuntu-latest", "ubuntu-24.04-arm") {
+        if ($row.$machine -eq "true") {
+            $matrix += [PSCustomObject]@{
+                img     = $img
+                machine = $machine
+            }
+        }
     }
 }
+
 
 $matrix = $matrix | ConvertTo-Json -Depth 10 -Compress | jq '{include: .}'
 # Clean CHANGED_KEYS
