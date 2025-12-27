@@ -44,7 +44,7 @@ jobs:
         run: |
           docker images
           docker history --human --no-trunc ${{steps.build.outputs.tag}}
-      
+
       - name: Tag image as latest
         shell: pwsh
         run: |
@@ -62,7 +62,7 @@ jobs:
       - name: Push Docker image
         run: |
           docker push ${{steps.build.outputs.tag}}
-          
+
           $image = "${{ steps.build.outputs.tag }}"
           $base = $image.Split(":")[0]
           docker tag $image "$base:latest"
