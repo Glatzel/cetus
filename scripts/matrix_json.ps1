@@ -4,8 +4,8 @@ $machine_map = @{
 'ghar-linux' = 'ubuntu-latest'
 }
 ForEach ($img in Get-ChildItem $PSScriptRoot/../images) {
-    write-output $img
     $img = $img.Name
+    write-output $img
     $matrix += [PSCustomObject]@{
         image   = $img
         machine = $machine_map[$img]
