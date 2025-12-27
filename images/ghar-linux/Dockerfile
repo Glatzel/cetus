@@ -1,8 +1,6 @@
 FROM debian:11
 ENV PATH="/root/.pixi/bin:${PATH}"
 RUN apt update && apt install -y --no-install-recommends curl ca-certificates && apt-get clean
-
-# Clean up APT cache
 RUN rm -rf /var/lib/apt/lists/*
 RUN apt clean
 RUN apt autoclean
