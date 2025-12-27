@@ -44,6 +44,13 @@ jobs:
         run: |
           docker images
           docker history --human --no-trunc ${{steps.build.outputs.tag}}
+      
+      - name: Tag image as latest
+        shell: pwsh
+        run: |
+          $image = "${{ steps.build.outputs.tag }}"
+          $base = $image.Split(":")[0]
+          docker tag $image "$base:latest"
 
       - name: Log in to DockerHub
 
@@ -53,7 +60,14 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push Docker image
-        run: docker push ${{steps.build.outputs.tag}}
+        run: |
+          docker push ${{steps.build.outputs.tag}}
+          
+          $image = "${{ steps.build.outputs.tag }}"
+          $base = $image.Split(":")[0]
+          docker tag $image "$base:latest"
+          docker push "$base:latest"
+        shell: pwsh
 
       - name: Log in to ghcr
         uses: docker/login-action@v3
@@ -66,3 +80,8 @@ jobs:
         run: |
           docker tag ${{steps.build.outputs.tag}} ghcr.io/${{steps.build.outputs.tag}}
           docker push ghcr.io/${{steps.build.outputs.tag}}
+
+          $image = "${{ steps.build.outputs.tag }}"
+          $base = $image.Split(":")[0]
+          docker tag ${{steps.build.outputs.tag}} ghcr.io/$base:latest
+          docker push "$base:latest"
