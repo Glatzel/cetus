@@ -2,7 +2,7 @@
 channels = ["conda-forge"]
 platform = "linux-64"
 [envs.base.dependencies]
-powershell = "*"  # Cross-platform automation and configuration tool
+powershell = "*" # Cross-platform automation and configuration tool
 
 [envs.base.exposed]
 pwsh = "pwsh"
