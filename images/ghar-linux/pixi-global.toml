@@ -17,5 +17,16 @@ wget = "*"        # Network downloader
 zstd = "*"        # Zstandard compression
 
 [envs.base.exposed]
+7z = "7z"
+aria2 = "aria2c"
+cmake = "cmake"
+curl = "curl"
+gh = "gh"
 git = "git"
+jq = "jq"
+magick = "magick"
+pkg-config = "pkg-config"
 pwsh = "pwsh"
+wget = "wget"
+yq = "yq"
+zstd = "zstd"
