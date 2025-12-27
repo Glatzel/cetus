@@ -14,6 +14,7 @@ ForEach ($img in Get-ChildItem $PSScriptRoot/../images) {
 $matrix = $matrix | ConvertTo-Json -Depth 10 -Compress | jq '{include: [.]}'
 # Clean CHANGED_KEYS
 $env:CHANGED_KEYS = "${env:CHANGED_KEYS}".Replace("\", "")
+write-output $env:CHANGED_KEYS
 switch ($env:GITHUB_EVENT_NAME) {
     "push" {
         $matrix = $matrix | jq -c --argjson images "${env:CHANGED_KEYS}" '{include: .include | map(select(.image as $p | $images | index($p)))}'
