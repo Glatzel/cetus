@@ -62,10 +62,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         id: build
         run: ./build.ps1
-        working-directory: images/${{matrix.image}}
+        working-directory: images/${{matrix.img}}
         shell: pwsh
 
       - name: inspect Docker image
         run: |
           docker images
-          docker history --human --no-trunc ${{matrix.image}}
+          docker history --human --no-trunc ${{matrix.img}}
