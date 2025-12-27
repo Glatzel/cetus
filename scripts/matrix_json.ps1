@@ -1,6 +1,6 @@
 $matrix = @()
 $machine_map = @{
-    "github-action-runner" = "ubuntu-latests"
+    "github-action-runner" = "ubuntu-latest"
 }
 ForEach ($img in Get-ChildItem $PSScriptRoot/../images) {
     $img = $img.Name
