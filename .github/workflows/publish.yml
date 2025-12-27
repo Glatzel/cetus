@@ -43,7 +43,7 @@ jobs:
       - name: inspect Docker image
         run: |
           docker images
-          docker history --human --no-trunc ${{steps.build.outputs.tag}}
+          docker history --human --no-trunc ${{inputs.name}}
 
       - name: Log in to DockerHub
 
@@ -53,7 +53,13 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push Docker image
-        run: docker push ${{steps.build.outputs.tag}}
+        run: |
+          docker tag ${{inputs.name}} glatzel/${{inputs.name}}:${{steps.build.outputs.version}}
+          docker push glatzel/${{inputs.name}}:${{steps.build.outputs.version}}
+
+          docker tag ${{inputs.name}} glatzel/${{inputs.name}}:latest
+          docker push glatzel/${{inputs.name}}:latest
+        shell: pwsh
 
       - name: Log in to ghcr
         uses: docker/login-action@v3
@@ -64,5 +70,9 @@ jobs:
 
       - name: Push Docker image to ghcr
         run: |
-          docker tag ${{steps.build.outputs.tag}} ghcr.io/${{steps.build.outputs.tag}}
-          docker push ghcr.io/${{steps.build.outputs.tag}}
+          docker tag ${{inputs.name}} ghcr.io/glatzel/${{inputs.name}}:${{steps.build.outputs.version}}
+          docker push ghcr.io/glatzel/${{inputs.name}}:${{steps.build.outputs.version}}
+
+          docker tag ${{inputs.name}} ghcr.io/glatzel/${{inputs.name}}:latest
+          docker push ghcr.io/glatzel/${{inputs.name}}:latest
+        shell: pwsh
