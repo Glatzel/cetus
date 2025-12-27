@@ -5,7 +5,7 @@ $machine_map = @{
 }
 ForEach ($img in Get-ChildItem $PSScriptRoot/../images) {
     $img = $img.Name
-    write-output $img
+    write-output $machine_map["$img"]
     $matrix += [PSCustomObject]@{
         image   = $img
         machine = $machine_map["$img"]
