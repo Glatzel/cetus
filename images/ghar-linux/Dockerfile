@@ -11,4 +11,3 @@ COPY ./pixi-global.toml /root/.pixi/manifests/pixi-global.toml
 RUN curl -fsSL https://pixi.sh/install.sh | bash
 RUN pixi global update
 RUN pixi clean cache -y
-RUN git config --global --add safe.directory '*'
