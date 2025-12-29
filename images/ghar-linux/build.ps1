@@ -5,7 +5,7 @@ $ROOT = git rev-parse --show-toplevel
 $json = gh release view -R actions/runner --json tagName | ConvertFrom-Json
 $runner_version = $json.tagName.Replace("v", "")
 
-docker xbuild build -f ./Dockerfile `
+docker buildx build -f ./Dockerfile `
     --platform linux/amd64, linux/arm64 `
     --build-arg RUNNER_VERSION=$runner_version `
     --target local `
@@ -15,7 +15,7 @@ docker xbuild build -f ./Dockerfile `
     -t ghcr.io/glatzel/ghar-linux-local:$runner_version `
     .
 $version = "0.0.1"
-docker xbuild build -f ./Dockerfile `
+docker buildx build -f ./Dockerfile `
     --platform linux/amd64, linux/arm64 `
     --target cloud `
     -t glatzel/ghar-linux:latest `
