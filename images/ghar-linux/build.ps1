@@ -14,13 +14,14 @@ docker xbuild build -f ./Dockerfile `
     -t ghcr.io/glatzel/ghar-linux-local:latest `
     -t ghcr.io/glatzel/ghar-linux-local:$runner_version `
     .
+$version = "0.0.1"
 docker xbuild build -f ./Dockerfile `
     --platform linux/amd64, linux/arm64 `
     --target cloud `
     -t glatzel/ghar-linux:latest `
-    -t glatzel/ghar-linux:$runner_version `
+    -t glatzel/ghar-linux:$version `
     -t ghcr.io/glatzel/ghar-linux:latest `
-    -t ghcr.io/glatzel/ghar-linux:$runner_version `
+    -t ghcr.io/glatzel/ghar-linux:$version `
     .
 
 docker images
