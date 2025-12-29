@@ -1,5 +1,6 @@
 [envs.base]
 channels = ["conda-forge"]
+platform = "linux-64"
 [envs.base.dependencies]
 aria2 = "*"       # CLI download manager
 cmake = "*"       # Build system
@@ -12,7 +13,10 @@ jq = "*"          # JSON processor
 p7zip = "*"       # 7-Zip file archiver
 pkg-config = "*"  # Helper tool for compiling applications and libraries
 powershell = "*"  # Cross-platform automation and configuration tool
+tar = "*"
+unzip = "*"
 wget = "*"        # Network downloader
+zip = "*"
 zstd = "*"        # Zstandard compression
 
 [envs.base.exposed]
@@ -26,6 +30,9 @@ jq = "jq"
 magick = "magick"
 pkg-config = "pkg-config"
 pwsh = "pwsh"
+tar = "tar"
+unzip = "unzip"
 wget = "wget"
 yq = "yq"
+zip = "zip"
 zstd = "zstd"
