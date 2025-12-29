@@ -7,10 +7,10 @@ foreach ($row in $csvData) {
         cross   = $row.cross
     }
 }
-
 $matrix = @{ include = $matrix } | ConvertTo-Json -Depth 10 -Compress | jq '{include: .}'
 # Clean CHANGED_KEYS
 $env:CHANGED_KEYS = "${env:CHANGED_KEYS}".Replace("\", "")
+Write-Output ${env:CHANGED_KEYS}
 switch ($env:GITHUB_EVENT_NAME) {
     "push" {
         $matrix = $matrix | jq -c --argjson images "${env:CHANGED_KEYS}" '{include: .include | map(select(.img as $p | $images | index($p)))}'
