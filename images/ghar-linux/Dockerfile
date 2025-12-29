@@ -6,6 +6,7 @@ RUN apt autoclean
 RUN apt autoremove -y
 
 FROM base AS cloud
+ENV PATH="/root/.pixi/bin:${PATH}"
 COPY ./pixi-global.toml /root/.pixi/manifests/pixi-global.toml
 RUN curl -fsSL https://pixi.sh/install.sh | bash
 RUN pixi global update
