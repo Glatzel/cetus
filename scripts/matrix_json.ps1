@@ -8,7 +8,7 @@ foreach ($row in $csvData) {
     }
 }
 
-$matrix = $matrix | ConvertTo-Json -Depth 10 -Compress | jq '{include: .}'
+$matrix = @{ include = $matrix } | ConvertTo-Json -Depth 10 -Compress | jq '{include: .}'
 # Clean CHANGED_KEYS
 $env:CHANGED_KEYS = "${env:CHANGED_KEYS}".Replace("\", "")
 switch ($env:GITHUB_EVENT_NAME) {
