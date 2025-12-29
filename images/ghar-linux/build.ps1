@@ -7,4 +7,3 @@ docker build -f ./Dockerfile `
     --build-arg RUNNER_VERSION=$version `
     -t $tag `
     .
-"version=$version" >> $env:GITHUB_OUTPUT
