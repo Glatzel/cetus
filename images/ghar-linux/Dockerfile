@@ -1,5 +1,5 @@
 FROM debian:11 AS base
-RUN apt update && apt install -y --no-install-recommends curl ca-certificates build-essential apt-utils
+RUN apt update && apt install -y --no-install-recommends curl ca-certificates build-essential
 RUN rm -rf /var/lib/apt/lists/*
 RUN apt clean
 RUN apt autoclean
