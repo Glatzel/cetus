@@ -2,7 +2,7 @@
 channels = ["conda-forge"]
 [envs.base.dependencies]
 aria2 = "*"       # CLI download manager
-cmake = "*"       # Build system
+cmake = "3.*"       # Build system
 curl = "*"        # Command line tool for transferring data with URLs
 gh = "*"          # GitHub CLI
 git = "*"         # version control
