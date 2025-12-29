@@ -1,6 +1,6 @@
 Set-Location $PSScriptRoot
 $ROOT = git rev-parse --show-toplevel
-. $ROOT/scripts/util.ps1
+. $ROOT/scripts/utils.ps1
 
 $json = gh release view -R actions/runner --json tagName | ConvertFrom-Json
 $runner_version = $json.tagName.Replace("v", "")
