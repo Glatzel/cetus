@@ -31,6 +31,8 @@ jobs:
       packages: write
       attestations: write
       id-token: write
+    env:
+      PUBLISH: true
     runs-on: ${{inputs.machine}}
     steps:
       - name: Checkout code
