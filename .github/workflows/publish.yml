@@ -16,6 +16,10 @@ on:
           - macos-latest
           - ubuntu-latest
           - ubuntu-24.04-arm
+      cross:
+        description: whether to use buildx
+        type: boolean
+        required: true
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
@@ -27,40 +31,24 @@ jobs:
       packages: write
       attestations: write
       id-token: write
+    env:
+      PUBLISH: true
     runs-on: ${{inputs.machine}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
-
-      - name: Build Docker image
-        env:
-          GH_TOKEN: ${{ github.token }}
-        id: build
-        run: ./build.ps1
-        working-directory: images/${{inputs.name}}
-        shell: pwsh
-
-      - name: inspect Docker image
-        run: |
-          docker images
-          docker history --human --no-trunc ${{inputs.name}}
-
+      - if: inputs.cross
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - if: inputs.cross
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
       - name: Log in to DockerHub
 
         uses: docker/login-action@v3
         with:
           username: glatzel
           password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Push Docker image
-        run: |
-          docker tag ${{inputs.name}} glatzel/${{inputs.name}}:${{steps.build.outputs.version}}
-          docker push glatzel/${{inputs.name}}:${{steps.build.outputs.version}}
-
-          docker tag ${{inputs.name}} glatzel/${{inputs.name}}:latest
-          docker push glatzel/${{inputs.name}}:latest
-        shell: pwsh
-
       - name: Log in to ghcr
         uses: docker/login-action@v3
         with:
@@ -68,11 +56,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
-      - name: Push Docker image to ghcr
-        run: |
-          docker tag ${{inputs.name}} ghcr.io/glatzel/${{inputs.name}}:${{steps.build.outputs.version}}
-          docker push ghcr.io/glatzel/${{inputs.name}}:${{steps.build.outputs.version}}
-
-          docker tag ${{inputs.name}} ghcr.io/glatzel/${{inputs.name}}:latest
-          docker push ghcr.io/glatzel/${{inputs.name}}:latest
+      - name: Build Docker image
+        env:
+          GH_TOKEN: ${{ github.token }}
+        id: build
+        run: ./build.ps1
+        working-directory: images/${{inputs.name}}
         shell: pwsh
