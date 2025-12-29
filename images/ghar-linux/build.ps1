@@ -1,3 +1,7 @@
+param(
+    [switch]$publish
+)
+
 Set-Location $PSScriptRoot
 $ROOT = git rev-parse --show-toplevel
 . $ROOT/scripts/utils.ps1
@@ -27,3 +31,22 @@ docker buildx build -f ./Dockerfile `
 docker images
 docker history --human --no-trunc glatzel/ghar-linux-local:latest
 docker history --human --no-trunc glatzel/ghar-linux:latest
+
+if ($publish) {
+    Write-Host "Publishing all images..."
+
+    $tags = @(
+        "glatzel/ghar-linux-local:latest",
+        "glatzel/ghar-linux-local:$runner_version",
+        "glatzel/ghar-linux:latest",
+        "glatzel/ghar-linux:$version",
+        "ghcr.io/glatzel/ghar-linux-local:latest",
+        "ghcr.io/glatzel/ghar-linux-local:$runner_version",
+        "ghcr.io/glatzel/ghar-linux:latest",
+        "ghcr.io/glatzel/ghar-linux:$version"
+    )
+
+    foreach ($tag in $tags) {
+        docker push $tag
+    }
+}
