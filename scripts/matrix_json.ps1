@@ -1,14 +1,10 @@
 $matrix = @()
 $csvData = Import-Csv "$PSScriptRoot/../images.csv"
 foreach ($row in $csvData) {
-    $img = $row.img
-    foreach ($machine in "windows-latest", "macos-latest", "ubuntu-latest", "ubuntu-24.04-arm") {
-        if ($row.$machine -eq "true") {
-            $matrix += [PSCustomObject]@{
-                img     = $img
-                machine = $machine
-            }
-        }
+    $matrix += [PSCustomObject]@{
+        img     = $row.img
+        machine = $row.machine
+        cross   = $row.cross
     }
 }
 
