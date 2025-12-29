@@ -23,3 +23,7 @@ docker xbuild build -f ./Dockerfile `
     -t ghcr.io/glatzel/ghar-linux:latest `
     -t ghcr.io/glatzel/ghar-linux:$runner_version `
     .
+
+docker images
+docker history --human --no-trunc glatzel/ghar-linux-local:latest
+docker history --human --no-trunc glatzel/ghar-linux:latest
