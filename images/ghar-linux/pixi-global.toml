@@ -1,6 +1,5 @@
 [envs.base]
 channels = ["conda-forge"]
-platform = "linux-64"
 [envs.base.dependencies]
 aria2 = "*"       # CLI download manager
 cmake = "*"       # Build system
