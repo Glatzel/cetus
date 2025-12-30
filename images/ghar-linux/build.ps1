@@ -4,7 +4,7 @@ $ROOT = git rev-parse --show-toplevel
 
 $json = gh release view -R actions/runner --json tagName | ConvertFrom-Json
 $runner_version = $json.tagName.Replace("v", "")
-$version = "0.0.1"
+$version = "0.0.2"
 $pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
 
 docker buildx build `
