@@ -1,4 +1,3 @@
 img,machine,cross
-ghar-linux-dev-local,ubuntu-latest,true
-ghar-linux-release-cloud,ubuntu-latest,true
-ghar-linux-release-local,ubuntu-latest,true
+ghar-linux-dev,ubuntu-latest,true
+ghar-linux-release,ubuntu-latest,true
