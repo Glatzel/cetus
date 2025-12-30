@@ -34,7 +34,7 @@ RUN ARCH=$(uname -m) && \
     ls -l && \
     tar xzf actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
     rm actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
-    chown -R runner ~runner && /home/runner/actions-runner/bin/installdependencies.sh
+    chown -R runner ~runner && /home/runner/actions-runner/bin/installdependencies.sh && \
     rm -rf /var/cache/dnf/* && \
     dnf clean all && \
     dnf autoremove -y
