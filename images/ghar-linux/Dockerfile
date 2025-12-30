@@ -21,7 +21,7 @@ RUN ARCH=$(uname -m) && \
         RUNNER_URL="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-arm64-${RUNNER_VERSION}.tar.gz"; \
     else \
         echo "Unsupported architecture: $ARCH" && exit 1; \
-    fi &&
+    fi && \
     echo $RUNNER_URL && \
     cd /home/runner && mkdir actions-runner && cd actions-runner && \
     curl -L -O $RUNNER_URL && \
@@ -72,7 +72,7 @@ RUN ARCH=$(uname -m) && \
         RUNNER_URL="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-arm64-${RUNNER_VERSION}.tar.gz"; \
     else \
         echo "Unsupported architecture: $ARCH" && exit 1; \
-    fi &&
+    fi && \
     echo $RUNNER_URL && \
     cd /home/runner && mkdir actions-runner && cd actions-runner && \
     curl -L -O $RUNNER_URL && \
