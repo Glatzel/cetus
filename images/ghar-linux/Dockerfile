@@ -3,7 +3,8 @@ RUN apt update && apt install -y --no-install-recommends \
     curl \
     ca-certificates \
     libudev-dev \
-    libc6-dev
+    libc6-dev \
+    file
 RUN rm -rf /var/lib/apt/lists/*
 RUN apt clean
 RUN apt autoclean
@@ -37,7 +38,8 @@ RUN dnf update -y && dnf install -y --setopt=install_weak_deps=False \
     curl \
     ca-certificates \
     libudev-devel \
-    glibc-devel
+    glibc-devel \
+    file
 RUN rm -rf /var/cache/dnf/*
 RUN dnf clean all
 RUN dnf autoremove -y
