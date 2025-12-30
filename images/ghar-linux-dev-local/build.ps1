@@ -10,8 +10,8 @@ docker buildx build `
     --platform 'linux/amd64,linux/arm64' `
     --build-arg RUNNER_VERSION=$runner_version `
     --target dev-local `
-    -t glatzel/ghar-linux/dev/local:latest `
-    -t glatzel/ghar-linux/dev/local:$runner_version `
-    -t ghcr.io/glatzel/ghar/linux/dev/local:latest `
-    -t ghcr.io/glatzel/ghar/linux/dev/local:$runner_version `
+    -t glatzel/ghar-linux-dev-local:latest `
+    -t glatzel/ghar-linux-dev-local:$runner_version `
+    -t ghcr.io/glatzel/ghar-linux-dev-local:latest `
+    -t ghcr.io/glatzel/ghar-linux-dev-local:$runner_version `
     .

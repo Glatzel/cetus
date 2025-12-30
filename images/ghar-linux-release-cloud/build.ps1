@@ -8,8 +8,8 @@ docker buildx build `
     $pushFlag `
     --platform 'linux/amd64,linux/arm64' `
     --target release-cloud `
-    -t glatzel/ghar/linux/release/cloud:latest `
-    -t glatzel/ghar/linux/release/cloud:$version `
-    -t ghcr.io/glatzel/ghar/linux/release/cloud:latest `
-    -t ghcr.io/glatzel/ghar/linux/release/cloud:$version `
+    -t glatzel/ghar-linux-release-cloud:latest `
+    -t glatzel/ghar-linux-release-cloud:$version `
+    -t ghcr.io/glatzel/ghar-linux-release-cloud:latest `
+    -t ghcr.io/glatzel/ghar-linux-release-cloud:$version `
     .

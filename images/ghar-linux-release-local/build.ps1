@@ -9,8 +9,8 @@ docker buildx build `
     $pushFlag `
     --platform 'linux/amd64,linux/arm64' `
     --target release-local `
-    -t glatzel/ghar/linux/release/local:latest `
-    -t glatzel/ghar/linux/release/local:$runner_version `
-    -t ghcr.io/glatzel/ghar/linux/release/local:latest `
-    -t ghcr.io/glatzel/ghar/linux/release/local:$runner_version `
+    -t glatzel/ghar-linux-release-local:latest `
+    -t glatzel/ghar-linux-release-local:$runner_version `
+    -t ghcr.io/glatzel/ghar-linux-release-local:latest `
+    -t ghcr.io/glatzel/ghar-linux-release-local:$runner_version `
     .
