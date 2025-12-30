@@ -14,17 +14,18 @@ FROM dev-base AS dev-local
 ARG RUNNER_VERSION
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
 RUN useradd -m runner
-RUN ARCH=$(uname -m) && \
-    if [ "$ARCH" = "x86_64" ]; then \
+RUN if [ $(uname -m) = "x86_64" ]; then \
+        ARCH="x64" \
         RUNNER_URL="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz"; \
-    elif [ "$ARCH" = "aarch64" ]; then \
+    elif [ $(uname -m) = "aarch64" ]; then \
+        ARCH="arm64" \
         RUNNER_URL="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-arm64-${RUNNER_VERSION}.tar.gz"; \
     else \
         echo "Unsupported architecture: $ARCH" && exit 1; \
     fi && \
-    echo $RUNNER_URL && \
+    echo "${RUNNER_URL}"" && \
     cd /home/runner && mkdir actions-runner && cd actions-runner && \
-    curl -L -O $RUNNER_URL && \
+    curl -L -O -s $RUNNER_URL && \
     ls -l && \
     file actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
     tar xzf actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
@@ -65,17 +66,18 @@ FROM release-base AS release-local
 ARG RUNNER_VERSION
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
 RUN useradd -m runner
-RUN ARCH=$(uname -m) && \
-    if [ "$ARCH" = "x86_64" ]; then \
+RUN if [ $(uname -m) = "x86_64" ]; then \
+        ARCH="x64" \
         RUNNER_URL="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz"; \
-    elif [ "$ARCH" = "aarch64" ]; then \
+    elif [ $(uname -m) = "aarch64" ]; then \
+        ARCH="arm64" \
         RUNNER_URL="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-arm64-${RUNNER_VERSION}.tar.gz"; \
     else \
         echo "Unsupported architecture: $ARCH" && exit 1; \
     fi && \
-    echo $RUNNER_URL && \
+    echo "${RUNNER_URL}"" && \
     cd /home/runner && mkdir actions-runner && cd actions-runner && \
-    curl -L -O $RUNNER_URL && \
+    curl -L -O -s $RUNNER_URL && \
     ls -l && \
     file actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
     tar xzf actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
