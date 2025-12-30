@@ -1,21 +1,23 @@
-FROM almalinux:8 AS release-base
+FROM almalinux:8 AS pixi
 RUN dnf install -y --setopt=install_weak_deps=False \
         curl \
-        ca-certificates \
-    && dnf clean all \
-    && rm -rf /var/cache/dnf
-
-FROM release-base AS release-cloud
+        ca-certificates
 ENV PATH="/root/.pixi/bin:${PATH}"
 COPY ./pixi-global.toml /root/.pixi/manifests/pixi-global.toml
 RUN curl -fsSL https://pixi.sh/install.sh | bash
 RUN pixi global update
-RUN pixi clean cache -y
+
+FROM release-base AS release-cloud
+ENV PATH="/root/.pixi/bin:${PATH}"
+COPY --from pixi /root/.pixi /root/.pixi
 
 FROM release-base AS release-local
 ARG RUNNER_VERSION
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
+COPY --from pixi /root/.pixi /home/runner/.pixi
 RUN useradd -m runner
+ADD ./start-runner.sh start-runner.sh
+RUN chmod +x start-runner.sh;
 RUN ARCH=$(uname -m) && \
     if [ "$ARCH" = "x86_64" ]; then \
         ARCH="x64" \
@@ -31,16 +33,10 @@ RUN ARCH=$(uname -m) && \
     curl -L -O -s $RUNNER_URL && \
     ls -l && \
     tar xzf actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
-    rm actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz
-RUN chown -R runner ~runner && /home/runner/actions-runner/bin/installdependencies.sh
-ADD ./start-runner.sh start-runner.sh
-RUN chmod +x start-runner.sh;
-RUN rm -rf /var/cache/dnf/*
-RUN dnf clean all
-RUN dnf autoremove -y
+    rm actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
+    chown -R runner ~runner && /home/runner/actions-runner/bin/installdependencies.sh
+    rm -rf /var/cache/dnf/* && \
+    dnf clean all && \
+    dnf autoremove -y
 USER runner
-# install pixi
-COPY --chown=runner:runner ./pixi-global.toml /home/runner/.pixi/manifests/pixi-global.toml
-RUN curl -fsSL https://pixi.sh/install.sh | bash
-# set the entrypoint to the start.sh script
 ENTRYPOINT ["./start-runner.sh"]
