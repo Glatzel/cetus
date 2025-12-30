@@ -2,8 +2,6 @@ FROM ubuntu:24.04 AS dev-base
 RUN apt update && apt install -y --no-install-recommends \
     curl \
     ca-certificates \
-    libudev-dev \
-    libc6-dev \
     build-essential \
     pkg-config
 RUN rm -rf /var/lib/apt/lists/*
