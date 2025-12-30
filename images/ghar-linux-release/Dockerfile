@@ -7,11 +7,11 @@ COPY ./pixi-global.toml /root/.pixi/manifests/pixi-global.toml
 RUN curl -fsSL https://pixi.sh/install.sh | bash
 RUN pixi global update
 
-FROM release-base AS release-cloud
+FROM almalinux:8 AS release-cloud
 ENV PATH="/root/.pixi/bin:${PATH}"
 COPY --from pixi /root/.pixi /root/.pixi
 
-FROM release-base AS release-local
+FROM almalinux:8 AS release-local
 ARG RUNNER_VERSION
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
 COPY --from pixi /root/.pixi /home/runner/.pixi
