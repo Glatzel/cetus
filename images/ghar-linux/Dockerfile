@@ -22,6 +22,7 @@ RUN ARCH=$(uname -m) && \
     else \
         echo "Unsupported architecture: $ARCH" && exit 1; \
     fi && \
+    cd /home/runner && mkdir actions-runner && cd actions-runner && \
     curl -L -O $RUNNER_URL && \
     file actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
     tar xzf actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
@@ -70,6 +71,7 @@ RUN ARCH=$(uname -m) && \
     else \
         echo "Unsupported architecture: $ARCH" && exit 1; \
     fi && \
+    cd /home/runner && mkdir actions-runner && cd actions-runner && \
     curl -L -O $RUNNER_URL && \
     file actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
     tar xzf actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
