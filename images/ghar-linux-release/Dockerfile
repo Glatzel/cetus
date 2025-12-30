@@ -10,6 +10,7 @@ RUN pixi global update
 FROM almalinux:8 AS release-cloud
 ENV PATH="/root/.pixi/bin:${PATH}"
 COPY --from=pixi /root/.pixi /root/.pixi
+RUN pixi global list
 
 FROM almalinux:8 AS release-local
 ARG RUNNER_VERSION
