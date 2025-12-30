@@ -15,6 +15,7 @@ ENV PATH="/home/runner/.pixi/bin:${PATH}"
 RUN useradd -m runner
 RUN cd /home/runner && mkdir actions-runner && cd actions-runner && \
     curl -O -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
+    file actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
     tar xzf actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
     rm actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz
 RUN chown -R runner ~runner && /home/runner/actions-runner/bin/installdependencies.sh
@@ -54,6 +55,7 @@ ENV PATH="/home/runner/.pixi/bin:${PATH}"
 RUN useradd -m runner
 RUN cd /home/runner && mkdir actions-runner && cd actions-runner && \
     curl -O -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
+    file actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
     tar xzf actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
     rm actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz
 RUN chown -R runner ~runner && /home/runner/actions-runner/bin/installdependencies.sh
