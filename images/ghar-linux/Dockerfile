@@ -1,5 +1,10 @@
 FROM ubuntu:24.04 AS dev-base
-RUN apt update && apt install -y --no-install-recommends curl ca-certificates build-essential
+RUN apt update && apt install -y --no-install-recommends \
+    curl \
+    ca-certificates \
+    build-essential \
+    libudev-dev \
+    libc6-dev
 RUN rm -rf /var/lib/apt/lists/*
 RUN apt clean
 RUN apt autoclean
@@ -32,7 +37,14 @@ RUN curl -fsSL https://pixi.sh/install.sh | bash
 ENTRYPOINT ["./start-runner.sh"]
 
 FROM almalinux:8 AS release-base
-RUN dnf update -y && dnf install -y --setopt=install_weak_deps=False curl ca-certificates gcc make
+RUN dnf update -y && dnf install -y --setopt=install_weak_deps=False \
+    curl \
+    ca-certificates \
+    gcc \
+    make \
+    libudev-devel \
+    glibc-devel
+
 RUN rm -rf /var/cache/dnf/*
 RUN dnf clean all
 RUN dnf autoremove -y
