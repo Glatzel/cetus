@@ -3,6 +3,7 @@ channels = ["conda-forge"]
 
 [envs.base.dependencies]
 aria2 = "*"
+ca-certificates = "*"
 curl = "*"
 gh = "*"
 git = "*"
@@ -15,7 +16,6 @@ unzip = "*"
 wget = "*"
 zip = "*"
 zstd = "*"
-ca-certificates="*"
 
 [envs.base.exposed]
 7z = "7z"
