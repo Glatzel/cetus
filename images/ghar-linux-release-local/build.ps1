@@ -1,4 +1,4 @@
-Set-Location $PSScriptRoot
+Set-Location $PSScriptRoot/../ghar-linux
 $ROOT = git rev-parse --show-toplevel
 . $ROOT/scripts/utils.ps1
 
