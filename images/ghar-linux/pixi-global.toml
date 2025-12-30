@@ -2,6 +2,8 @@
 channels = ["conda-forge"]
 [envs.base.dependencies]
 aria2 = "*"       # CLI download manager
+autoconf = "*"
+automake = "*"
 cmake = "3.*"     # Build system
 curl = "*"        # Command line tool for transferring data with URLs
 gcc = "*"
@@ -14,6 +16,7 @@ make = "*"
 p7zip = "*"       # 7-Zip file archiver
 pkg-config = "*"  # Helper tool for compiling applications and libraries
 powershell = "*"  # Cross-platform automation and configuration tool
+python = "*"
 tar = "*"
 unzip = "*"
 wget = "*"        # Network downloader
@@ -23,6 +26,8 @@ zstd = "*"        # Zstandard compression
 [envs.base.exposed]
 7z = "7z"
 aria2 = "aria2c"
+autoconf = "autoconf"
+automake = "automake"
 cmake = "cmake"
 curl = "curl"
 gcc = "gcc"
@@ -33,6 +38,7 @@ magick = "magick"
 make = "make"
 pkg-config = "pkg-config"
 pwsh = "pwsh"
+python = "python"
 tar = "tar"
 unzip = "unzip"
 wget = "wget"
