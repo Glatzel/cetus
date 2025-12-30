@@ -18,6 +18,7 @@ COPY --from=pixi /root/.pixi /home/runner/.pixi
 RUN useradd -m runner
 ADD ./start-runner.sh start-runner.sh
 RUN chmod +x start-runner.sh;
+RUN pixi global list
 RUN ARCH=$(uname -m) && \
     if [ "$ARCH" = "x86_64" ]; then \
         ARCH="x64" \
