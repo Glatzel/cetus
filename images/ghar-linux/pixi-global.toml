@@ -10,6 +10,7 @@ gcc = "*"
 gh = "*"          # GitHub CLI
 git = "*"         # version control
 go-yq = "*"       # YAML processor
+gzip = "*"
 imagemagick = "*" # Image processing
 jq = "*"          # JSON processor
 libtool = "*"
@@ -23,6 +24,7 @@ unzip = "*"
 wget = "*"        # Network downloader
 zip = "*"
 zstd = "*"        # Zstandard compression
+
 [envs.base.exposed]
 7z = "7z"
 aria2 = "aria2c"
@@ -33,6 +35,7 @@ curl = "curl"
 gcc = "gcc"
 gh = "gh"
 git = "git"
+gzip = "gzip"
 jq = "jq"
 libtool = "libtool"
 magick = "magick"
