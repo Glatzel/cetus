@@ -3,6 +3,7 @@ channels = ["conda-forge"]
 
 [envs.base.dependencies]
 aria2 = "*"
+ca-certificates = "*"
 curl = "*"
 gh = "*"
 git = "*"

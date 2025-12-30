@@ -1,22 +1,39 @@
-FROM almalinux:8 AS release-base
-RUN dnf update -y && dnf install -y --setopt=install_weak_deps=False \
-    curl \
-    ca-certificates
-RUN rm -rf /var/cache/dnf/*
-RUN dnf clean all
-RUN dnf autoremove -y
-
-FROM release-base AS release-cloud
+FROM almalinux:8 AS pixi-cloud
+RUN dnf install -y --setopt=install_weak_deps=False \
+        curl \
+        ca-certificates
 ENV PATH="/root/.pixi/bin:${PATH}"
 COPY ./pixi-global.toml /root/.pixi/manifests/pixi-global.toml
 RUN curl -fsSL https://pixi.sh/install.sh | bash
 RUN pixi global update
-RUN pixi clean cache -y
 
-FROM release-base AS release-local
+FROM almalinux:8 AS release-cloud
+ENV PATH="/root/.pixi/bin:${PATH}"
+COPY --from=pixi-cloud /root/.pixi /root/.pixi
+RUN pixi global list
+
+FROM almalinux:8 AS pixi-local
+RUN dnf install -y --setopt=install_weak_deps=False \
+        curl \
+        ca-certificates
+RUN useradd -m runner
+USER runner
+ENV PATH="/home/runner/.pixi/bin:${PATH}"
+COPY ./pixi-global.toml /user/runner/.pixi/manifests/pixi-global.toml
+RUN curl -fsSL https://pixi.sh/install.sh | bash
+RUN pixi global update
+
+FROM almalinux:8 AS release-local
 ARG RUNNER_VERSION
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
+COPY --from=pixi-local  /home/runner/.pixi /home/runner/.pixi
 RUN useradd -m runner
+ADD ./start-runner.sh start-runner.sh
+RUN chmod +x start-runner.sh;
+RUN ls -l /home/runner/.pixi
+RUN ls -l /home/runner/.pixi/bin
+RUN ls -l /home/runner/.pixi/manifests
+RUN pixi global list
 RUN ARCH=$(uname -m) && \
     if [ "$ARCH" = "x86_64" ]; then \
         ARCH="x64" \
@@ -33,15 +50,9 @@ RUN ARCH=$(uname -m) && \
     ls -l && \
     tar xzf actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
     rm actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz
-RUN chown -R runner ~runner && /home/runner/actions-runner/bin/installdependencies.sh
-ADD ./start-runner.sh start-runner.sh
-RUN chmod +x start-runner.sh;
-RUN rm -rf /var/cache/dnf/*
-RUN dnf clean all
-RUN dnf autoremove -y
+RUN chown -R runner /home/runner && /home/runner/actions-runner/bin/installdependencies.sh && \
+    rm -rf /var/cache/dnf/* && \
+    dnf clean all && \
+    dnf autoremove -y
 USER runner
-# install pixi
-COPY --chown=runner:runner ./pixi-global.toml /home/runner/.pixi/manifests/pixi-global.toml
-RUN curl -fsSL https://pixi.sh/install.sh | bash
-# set the entrypoint to the start.sh script
 ENTRYPOINT ["./start-runner.sh"]
