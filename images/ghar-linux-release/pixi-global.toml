@@ -15,6 +15,7 @@ unzip = "*"
 wget = "*"
 zip = "*"
 zstd = "*"
+ca-certificates="*"
 
 [envs.base.exposed]
 7z = "7z"
