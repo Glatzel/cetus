@@ -4,7 +4,9 @@ RUN apt update && apt install -y --no-install-recommends \
     ca-certificates \
     libudev-dev \
     libc6-dev \
-    file
+    file \
+    build-essential \
+    pkg-config
 RUN rm -rf /var/lib/apt/lists/*
 RUN apt clean
 RUN apt autoclean
@@ -51,7 +53,9 @@ RUN dnf update -y && dnf install -y --setopt=install_weak_deps=False \
     ca-certificates \
     libudev-devel \
     glibc-devel \
-    file
+    file \
+    pkg-config
+RUN dnf groupinstall "Development Tools"
 RUN rm -rf /var/cache/dnf/*
 RUN dnf clean all
 RUN dnf autoremove -y
