@@ -26,7 +26,7 @@ RUN pixi global update
 FROM almalinux:8 AS release-local
 ARG RUNNER_VERSION
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
-COPY --from=pixi-local /root/.pixi /home/runner/.pixi
+COPY --from=pixi-local  /home/runner/.pixi /home/runner/.pixi
 RUN useradd -m runner
 ADD ./start-runner.sh start-runner.sh
 RUN chmod +x start-runner.sh;
