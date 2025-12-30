@@ -8,6 +8,7 @@ $runner_version = $json.tagName.Replace("v", "")
 docker buildx build `
     $pushFlag `
     --platform 'linux/amd64,linux/arm64' `
+    --build-arg RUNNER_VERSION=$runner_version `
     --target release-local `
     -t glatzel/ghar-linux-release-local:latest `
     -t glatzel/ghar-linux-release-local:$runner_version `
