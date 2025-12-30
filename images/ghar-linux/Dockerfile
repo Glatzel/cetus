@@ -14,11 +14,18 @@ FROM dev-base AS dev-local
 ARG RUNNER_VERSION
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
 RUN useradd -m runner
-RUN cd /home/runner && mkdir actions-runner && cd actions-runner && \
-    curl -O -L -I https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
-    file actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
-    tar xzf actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
-    rm actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz
+RUN ARCH=$(uname -m) && \
+    if [ "$ARCH" = "x86_64" ]; then \
+        RUNNER_URL="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz"; \
+    elif [ "$ARCH" = "aarch64" ]; then \
+        RUNNER_URL="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-arm64-${RUNNER_VERSION}.tar.gz"; \
+    else \
+        echo "Unsupported architecture: $ARCH" && exit 1; \
+    fi && \
+    curl -L -O $RUNNER_URL && \
+    file actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
+    tar xzf actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
+    rm actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz
 RUN chown -R runner ~runner && /home/runner/actions-runner/bin/installdependencies.sh
 ADD ./start-runner.sh start-runner.sh
 RUN chmod +x start-runner.sh;
@@ -55,11 +62,18 @@ FROM release-base AS release-local
 ARG RUNNER_VERSION
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
 RUN useradd -m runner
-RUN cd /home/runner && mkdir actions-runner && cd actions-runner && \
-    curl -O -L -I https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
-    file actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
-    tar xzf actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
-    rm actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz
+RUN ARCH=$(uname -m) && \
+    if [ "$ARCH" = "x86_64" ]; then \
+        RUNNER_URL="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz"; \
+    elif [ "$ARCH" = "aarch64" ]; then \
+        RUNNER_URL="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-arm64-${RUNNER_VERSION}.tar.gz"; \
+    else \
+        echo "Unsupported architecture: $ARCH" && exit 1; \
+    fi && \
+    curl -L -O $RUNNER_URL && \
+    file actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
+    tar xzf actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
+    rm actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz
 RUN chown -R runner ~runner && /home/runner/actions-runner/bin/installdependencies.sh
 ADD ./start-runner.sh start-runner.sh
 RUN chmod +x start-runner.sh;
