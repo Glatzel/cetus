@@ -1,10 +1,9 @@
 FROM almalinux:8 AS release-base
-RUN dnf update -y && dnf install -y --setopt=install_weak_deps=False \
-    curl \
-    ca-certificates
-RUN rm -rf /var/cache/dnf/*
-RUN dnf clean all
-RUN dnf autoremove -y
+RUN dnf install -y --setopt=install_weak_deps=False \
+        curl \
+        ca-certificates \
+    && dnf clean all \
+    && rm -rf /var/cache/dnf
 
 FROM release-base AS release-cloud
 ENV PATH="/root/.pixi/bin:${PATH}"
