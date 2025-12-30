@@ -12,6 +12,7 @@ git = "*"         # version control
 go-yq = "*"       # YAML processor
 imagemagick = "*" # Image processing
 jq = "*"          # JSON processor
+libtool = "*"
 make = "*"
 p7zip = "*"       # 7-Zip file archiver
 pkg-config = "*"  # Helper tool for compiling applications and libraries
@@ -22,7 +23,6 @@ unzip = "*"
 wget = "*"        # Network downloader
 zip = "*"
 zstd = "*"        # Zstandard compression
-
 [envs.base.exposed]
 7z = "7z"
 aria2 = "aria2c"
@@ -34,6 +34,7 @@ gcc = "gcc"
 gh = "gh"
 git = "git"
 jq = "jq"
+libtool = "libtool"
 magick = "magick"
 make = "make"
 pkg-config = "pkg-config"
