@@ -1,4 +1,5 @@
 #!/bin/bash
+useradd -m runner
 chown -R runner pixi global list
 chmod +x start-runner.sh;
 ARCH=$(uname -m)
@@ -12,7 +13,6 @@ else
     echo "Unsupported architecture: $ARCH" && exit 1
 fi
 echo "Runner URL: $RUNNER_URL"
-useradd -m runner
 cd /home/runner
 mkdir actions-runner
 cd actions-runner
