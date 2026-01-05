@@ -21,6 +21,7 @@ RUN useradd -m runner
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
 COPY --from=pixi-base --chown=runner /home/runner/.pixi /home/runner/.pixi
 COPY ./start-runner.sh start-runner.sh
+RUN chmod +x start-runner.sh
 RUN ARCH=$(uname -m) && \
     if [ "$ARCH" = "x86_64" ]; then \
         ARCH="x64" && \
