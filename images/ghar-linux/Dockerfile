@@ -36,6 +36,7 @@ ARG RUNNER_VERSION
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
 COPY --from=pixi-base  /home/runner/.pixi /home/runner/.pixi
 COPY ./start-runner.sh start-runner.sh
+COPY ./install-action-runner.sh install-action-runner.sh
 RUN bash install-action-runner.sh && \
     rm -rf /var/lib/apt/lists/* && \
     apt clean && \

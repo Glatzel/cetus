@@ -16,7 +16,7 @@ docker buildx build `
     -t ghcr.io/glatzel/ghar-linux-release-cloud:$version `
     .
 Write-Output "::endgroup::"
-Write-Output "::group::release-cloud"
+Write-Output "::group::release-local"
 docker buildx build `
     $pushFlag `
     --platform 'linux/amd64,linux/arm64' `
@@ -29,7 +29,7 @@ docker buildx build `
     -t ghcr.io/glatzel/ghar-linux-release-local:$version `
     .
 Write-Output "::endgroup::"
-Write-Output "::group::release-cloud"
+Write-Output "::group::dev-local"
 docker buildx build `
     $pushFlag `
     --platform 'linux/amd64,linux/arm64' `
