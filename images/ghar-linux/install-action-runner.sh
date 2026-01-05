@@ -1,5 +1,4 @@
 #!/bin/bash
-pixi global list
 chmod +x start-runner.sh;
 ARCH=$(uname -m)
 if [ "$ARCH" = "x86_64" ]; then
@@ -16,7 +15,7 @@ useradd -m runner
 cd /home/runner
 mkdir actions-runner
 cd actions-runner
-curl -L -O -s $RUNNER_URL
+./.pixi/envs/base/bin/curl -L -O -s $RUNNER_URL
 ls -l
 tar xzf actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz
 rm actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz
