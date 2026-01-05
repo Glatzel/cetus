@@ -4,9 +4,9 @@ COPY ./pixi-global.toml /root/.pixi/manifests/pixi-global.toml
 RUN curl -fsSL https://pixi.sh/install.sh | bash
 RUN pixi global update
 RUN useradd -m runner
+COPY ./pixi-global.toml /user/runner/.pixi/manifests/pixi-global.toml
 USER runner
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
-COPY ./pixi-global.toml /user/runner/.pixi/manifests/pixi-global.toml
 RUN curl -fsSL https://pixi.sh/install.sh | bash
 RUN pixi global update
 
