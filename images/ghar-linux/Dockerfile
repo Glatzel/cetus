@@ -58,9 +58,9 @@ RUN chmod +x start-runner.sh;
     rm actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz
     chown -R runner /home/runner/actions-runner/bin/installdependencies.sh
     rm -rf /var/lib/apt/lists/*
-    apt clean 
-    apt autoclean 
-    apt autoremove -y 
+    apt clean
+    apt autoclean
+    apt autoremove -y
 USER runner
 RUN pixi global list
 ENTRYPOINT ["./start-runner.sh"]
