@@ -33,6 +33,7 @@ $runner_version = $json.tagName.Replace("v", "")
 Write-Output "::group::dev-local"
 docker buildx build `
     $pushFlag `
+    --no-cache `
     --platform 'linux/amd64,linux/arm64' `
     --build-arg RUNNER_VERSION=$runner_version `
     --target dev-local `
