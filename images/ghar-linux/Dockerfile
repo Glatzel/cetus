@@ -42,8 +42,8 @@ RUN ARCH=$(uname -m) && \
     if [ "$ARCH" = "x86_64" ]; then \
         ARCH="x64" && \
         RUNNER_URL="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz"; \
-    elif [ "$ARCH" = "aarch64" ]; then
-        ARCH="arm64"
+    elif [ "$ARCH" = "aarch64" ]; then \
+        ARCH="arm64" && \
         RUNNER_URL="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-arm64-${RUNNER_VERSION}.tar.gz"; \
     else \
         echo "Unsupported architecture: $ARCH" && exit 1; \
