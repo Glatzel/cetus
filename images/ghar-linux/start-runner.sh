@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "${PATH}"
 pixi global update -vv
 
 GH_OWNER=$GH_OWNER
