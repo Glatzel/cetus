@@ -37,8 +37,8 @@ RUN useradd -m runner
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
 COPY --from=pixi-base --chown=runner /home/runner/.pixi /home/runner/.pixi
 COPY ./start-runner.sh start-runner.sh
-RUN chmod +x start-runner.sh;
-    ARCH=$(uname -m)
+RUN chmod +x start-runner.sh
+RUN ARCH=$(uname -m)
     if [ "$ARCH" = "x86_64" ]; then
         ARCH="x64"
         RUNNER_URL="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz"
