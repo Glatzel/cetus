@@ -15,7 +15,7 @@ useradd -m runner
 cd /home/runner
 mkdir actions-runner
 cd actions-runner
-./.pixi/envs/base/bin/curl -L -O -s $RUNNER_URL
+../.pixi/envs/base/bin/curl -L -O -s $RUNNER_URL
 ls -l
 tar xzf actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz
 rm actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz
