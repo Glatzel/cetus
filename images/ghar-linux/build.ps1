@@ -26,7 +26,7 @@ docker buildx build `
     -t ghcr.io/glatzel/ghar-linux-release-local:latest `
     -t ghcr.io/glatzel/ghar-linux-release-local:$version `
     .
-    
+
 docker buildx build `
     $pushFlag `
     --platform 'linux/amd64,linux/arm64' `
