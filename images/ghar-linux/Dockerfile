@@ -17,8 +17,9 @@ RUN pixi global list
 
 FROM almalinux:8 AS release-local
 ARG RUNNER_VERSION
+RUN useradd -m runner
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
-COPY --from=pixi-base  /home/runner/.pixi /home/runner/.pixi
+COPY --from=pixi-base --chown=runner /home/runner/.pixi /home/runner/.pixi
 COPY ./start-runner.sh start-runner.sh
 COPY ./install-action-runner.sh install-action-runner.sh
 RUN bash install-action-runner.sh && \
@@ -31,8 +32,9 @@ ENTRYPOINT ["./start-runner.sh"]
 
 FROM ubuntu:latest AS dev-local
 ARG RUNNER_VERSION
+RUN useradd -m runner
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
-COPY --from=pixi-base  /home/runner/.pixi /home/runner/.pixi
+COPY --from=pixi-base --chown=runner /home/runner/.pixi /home/runner/.pixi
 COPY ./start-runner.sh start-runner.sh
 COPY ./install-action-runner.sh install-action-runner.sh
 RUN bash install-action-runner.sh && \
