@@ -1,3 +1,2 @@
 img,machine,cross
-ghar-linux-dev,ubuntu-latest,true
-ghar-linux-release,ubuntu-latest,true
+ghar-linux,ubuntu-latest,true
