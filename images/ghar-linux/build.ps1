@@ -29,6 +29,7 @@ $runner_version = $json.tagName.Replace("v", "")
 #     -t ghcr.io/glatzel/ghar-linux-release-local:$version `
 #     .
 # Write-Output "::endgroup::"
+
 Write-Output "::group::dev-local"
 docker buildx build `
     $pushFlag `
