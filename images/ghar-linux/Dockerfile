@@ -21,8 +21,24 @@ RUN useradd -m runner
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
 COPY --from=pixi-base --chown=runner /home/runner/.pixi /home/runner/.pixi
 COPY ./start-runner.sh start-runner.sh
-COPY ./install-action-runner.sh install-action-runner.sh
-RUN bash install-action-runner.sh
+RUN ARCH=$(uname -m) && \
+    if [ "$ARCH" = "x86_64" ]; then \
+        ARCH="x64" && \
+        RUNNER_URL="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz"; \
+    elif [ "$ARCH" = "aarch64" ]; then \
+        ARCH="arm64" && \
+        RUNNER_URL="https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-arm64-${RUNNER_VERSION}.tar.gz"; \
+    else \
+        echo "Unsupported architecture: $ARCH" && exit 1; \
+    fi && \
+    echo "Runner URL: $RUNNER_URL" && \
+    cd /home/runner && \
+    mkdir actions-runner && \
+    cd actions-runner && \
+    curl -L -O -s $RUNNER_URL && \
+    ls -l && \
+    tar xzf actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz && \
+    rm actions-runner-linux-${ARCH}-${RUNNER_VERSION}.tar.gz
 RUN chown -R runner /home/runner/actions-runner/bin/installdependencies.sh && \
     rm -rf /var/cache/dnf/* && \
     dnf clean all && \
