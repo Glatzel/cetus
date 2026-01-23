@@ -2,8 +2,7 @@ $ROOT = git rev-parse --show-toplevel
 . $ROOT/scripts/utils.ps1
 
 $version = "0.0.3"
-$json = gh release view -R actions/runner --json tagName | ConvertFrom-Json
-$runner_version = $json.tagName.Replace("v", "")
+$runner_version = "v2.331.0"
 
 Write-Output "::group::release-cloud"
 docker buildx build `
