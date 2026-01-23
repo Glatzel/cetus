@@ -2,7 +2,7 @@ $ROOT = git rev-parse --show-toplevel
 . $ROOT/scripts/utils.ps1
 
 $version = "0.0.3"
-$runner_version = "v2.331.0"
+$runner_version = "2.331.0"
 
 Write-Output "::group::release-cloud"
 docker buildx build `
