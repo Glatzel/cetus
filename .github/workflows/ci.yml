@@ -49,6 +49,8 @@ jobs:
       attestations: write
       id-token: write
     needs: dispatch
+    env:
+      PUBLISH: ${{ github.event_name == 'push' && 'true' || ''}}
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.dispatch.outputs.matrix) }}
