@@ -3,6 +3,7 @@ $ROOT = git rev-parse --show-toplevel
 
 $version = "0.0.3"
 $runner_version = "2.331.0"
+$date = "2026-02-04"
 
 Write-Output "::group::release-cloud"
 docker buildx build `
@@ -11,8 +12,10 @@ docker buildx build `
     --target release-cloud `
     -t glatzel/ghar-linux-release-cloud:latest `
     -t glatzel/ghar-linux-release-cloud:v$version `
+    -t glatzel/ghar-linux-release-cloud:$date `
     -t ghcr.io/glatzel/ghar-linux-release-cloud:latest `
     -t ghcr.io/glatzel/ghar-linux-release-cloud:v$version `
+    -t ghcr.io/glatzel/ghar-linux-release-cloud:$date `
     .
 Write-Output "::endgroup::"
 Write-Output "::group::release-local"
@@ -24,8 +27,10 @@ docker buildx build `
     --target release-local `
     -t glatzel/ghar-linux-release-local:latest `
     -t "glatzel/ghar-linux-release-local`:v${version}-${version-runner}" `
+    -t "glatzel/ghar-linux-release-local`:${date}" `
     -t ghcr.io/glatzel/ghar-linux-release-local:latest `
     -t "ghcr.io/glatzel/ghar-linux-release-local`:v${version}-${version-runner}" `
+    -t "ghcr.io/glatzel/ghar-linux-release-local`:${date}" `
     .
 Write-Output "::endgroup::"
 Write-Output "::group::dev-local"
@@ -36,7 +41,9 @@ docker buildx build `
     --target dev-local `
     -t glatzel/ghar-linux-dev-local:latest `
     -t "glatzel/ghar-linux-dev-local`:v${version}-${version-runner}" `
+    -t "glatzel/ghar-linux-dev-local`:v${date}" `
     -t ghcr.io/glatzel/ghar-linux-dev-local:latest `
     -t "ghcr.io/glatzel/ghar-linux-dev-local`:v${version}-${version-runner}" `
+    -t "ghcr.io/glatzel/ghar-linux-dev-local`:v${date}" `
     .
 Write-Output "::endgroup::"
