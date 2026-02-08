@@ -2,8 +2,8 @@ $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
 $pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
-$cloud_version = "0.1.1"
-$local_version = "0.0.4"
+$cloud_version = "0.1.2"
+$local_version = "0.0.5"
 $runner_version = "2.331.0"
 $date = "2026-02-08"
 
@@ -42,9 +42,9 @@ docker buildx build `
     --target dev-local `
     -t glatzel/ghar-linux-dev-local:latest `
     -t "glatzel/ghar-linux-dev-local`:v${local_version}-runner-${runner_version}" `
-    -t "glatzel/ghar-linux-dev-local`:v${date}" `
+    -t "glatzel/ghar-linux-dev-local`:${date}" `
     -t ghcr.io/glatzel/ghar-linux-dev-local:latest `
     -t "ghcr.io/glatzel/ghar-linux-dev-local`:v${local_version}-runner-${runner_version}" `
-    -t "ghcr.io/glatzel/ghar-linux-dev-local`:v${date}" `
+    -t "ghcr.io/glatzel/ghar-linux-dev-local`:${date}" `
     .
 Write-Output "::endgroup::"
