@@ -2,10 +2,10 @@ $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
 $pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
-$cloud_version = "0.1.0"
-$local_version = "0.0.3"
+$cloud_version = "0.1.1"
+$local_version = "0.0.4"
 $runner_version = "2.331.0"
-$date = "2026-02-04"
+$date = "2026-02-08"
 
 Write-Output "::group::release-cloud"
 docker buildx build `
