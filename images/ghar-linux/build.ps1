@@ -2,8 +2,8 @@ $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
 $pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
-$cloud_version = "0.1.1"
-$local_version = "0.0.4"
+$cloud_version = "0.1.2"
+$local_version = "0.0.5"
 $runner_version = "2.331.0"
 $date = "2026-02-08"
 
