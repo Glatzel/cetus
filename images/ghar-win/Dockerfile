@@ -3,11 +3,7 @@ SHELL ["cmd", "/S", "/C"]
 RUN powershell -ExecutionPolicy Bypass -c "irm -useb https://pixi.sh/install.ps1 | iex"
 COPY ./pixi-global.toml C:/Users/ContainerUser/.pixi/manifests/pixi-global.toml
 RUN pixi global update & pixi clean cache -y
-ENTRYPOINT [
-  "pwsh",
-  "-Command",
-  "$ErrorActionPreference='Stop'; $PSNativeCommandUseErrorActionPreference=$true;"
-]
+ENTRYPOINT ["pwsh", "-Command","$ErrorActionPreference='Stop'; $PSNativeCommandUseErrorActionPreference=$true;"]
 
 FROM cloud AS local
 ARG RUNNER_VERSION
