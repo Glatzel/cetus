@@ -12,7 +12,7 @@ powershell = "*"
 zstd = "*"
 
 [envs.base.exposed]
-7z = "7z"
+7z = "7zz"
 aria2 = "aria2c"
 curl = "curl"
 gh = "gh"
