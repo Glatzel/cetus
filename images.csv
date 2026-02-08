@@ -1,2 +1,3 @@
 img,machine,cross
 ghar-linux,ubuntu-latest,true
+ghar-win,windows-latest,false
