@@ -29,6 +29,9 @@ docker build `
     -t "ghcr.io/glatzel/ghar-win-local`:${date}" `
     .
 Write-Output "::endgroup::"
+docker image ls
+docker history glatzel/ghar-win-cloud:latest
+docker history glatzel/ghar-win-local:latest
 if ($env:PUBLISH -eq "true") {
     docker push glatzel/ghar-win-cloud:latest
     docker push glatzel/ghar-win-cloud:v$cloud_version
