@@ -1,20 +1,14 @@
 [envs.base]
-channels = ["conda-forge"]
+channels = ["https://prefix.dev/glatzel", "conda-forge"]
 
 [envs.base.dependencies]
 7zip = "*"
 aria2 = "*"
-ca-certificates = "*"
 curl = "*"
 gh = "*"
 git = "*"
-gzip = "*"
 jq = "*"
 powershell = "*"
-tar = "*"
-unzip = "*"
-wget = "*"
-zip = "*"
 zstd = "*"
 
 [envs.base.exposed]
@@ -23,11 +17,6 @@ aria2 = "aria2c"
 curl = "curl"
 gh = "gh"
 git = "git"
-gzip = "gzip"
 jq = "jq"
 pwsh = "pwsh"
-tar = "tar"
-unzip = "unzip"
-wget = "wget"
-zip = "zip"
 zstd = "zstd"
