@@ -1,5 +1,5 @@
-$ROOT = git rev-parse --show-toplevel
-. $ROOT/scripts/utils.ps1
+$ErrorActionPreference = "Stop"
+$PSNativeCommandUseErrorActionPreference = $true
 
 $cloud_version = "0.0.1"
 $local_version = "0.0.1"
@@ -8,7 +8,6 @@ $date = "2026-02-08"
 
 Write-Output "::group::cloud"
 docker build `
-    $pushFlag `
     --target cloud `
     -t glatzel/ghar-win-cloud:latest `
     -t glatzel/ghar-win-cloud:v$cloud_version `
@@ -20,15 +19,28 @@ docker build `
 Write-Output "::endgroup::"
 Write-Output "::group::local"
 docker build `
-    $pushFlag `
-    --build-arg RUNNER_VERSION=$runner_version `
     --build-arg RUNNER_VERSION=$runner_version `
     --target local `
     -t glatzel/ghar-win-local:latest `
-    -t "glatzel/ghar-win-local`:v${version}-runner-${runner_version}" `
+    -t "glatzel/ghar-win-local`:v${local_version}-runner-${runner_version}" `
     -t "glatzel/ghar-win-local`:${date}" `
     -t ghcr.io/glatzel/ghar-win-local:latest `
     -t "ghcr.io/glatzel/ghar-win-local`:v${local_version}-runner-${runner_version}" `
     -t "ghcr.io/glatzel/ghar-win-local`:${date}" `
     .
 Write-Output "::endgroup::"
+if ($env:PUBLISH -eq "true") {
+    docker push glatzel/ghar-win-cloud:latest 
+    docker push glatzel/ghar-win-cloud:v$cloud_version 
+    docker push glatzel/ghar-win-cloud:$date 
+    docker push ghcr.io/glatzel/ghar-win-cloud:latest 
+    docker push ghcr.io/glatzel/ghar-win-cloud:v$cloud_version 
+    docker push ghcr.io/glatzel/ghar-win-cloud:$date 
+
+    docker push glatzel/ghar-win-local:latest 
+    docker push "glatzel/ghar-win-local`:v${local_version}-runner-${runner_version}" 
+    docker push "glatzel/ghar-win-local`:${date}" 
+    docker push ghcr.io/glatzel/ghar-win-local:latest 
+    docker push "ghcr.io/glatzel/ghar-win-local`:v${local_version}-runner-${runner_version}" 
+    docker push "ghcr.io/glatzel/ghar-win-local`:${date}" 
+}

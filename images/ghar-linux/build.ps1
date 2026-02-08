@@ -1,6 +1,7 @@
-$ROOT = git rev-parse --show-toplevel
-. $ROOT/scripts/utils.ps1
+$ErrorActionPreference = "Stop"
+$PSNativeCommandUseErrorActionPreference = $true
 
+$pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
 $cloud_version = "0.1.0"
 $local_version = "0.0.3"
 $runner_version = "2.331.0"
@@ -24,10 +25,9 @@ docker buildx build `
     $pushFlag `
     --platform 'linux/amd64,linux/arm64' `
     --build-arg RUNNER_VERSION=$runner_version `
-    --build-arg RUNNER_VERSION=$runner_version `
     --target release-local `
     -t glatzel/ghar-linux-release-local:latest `
-    -t "glatzel/ghar-linux-release-local`:v${version}-runner-${runner_version}" `
+    -t "glatzel/ghar-linux-release-local`:v${local_version}-runner-${runner_version}" `
     -t "glatzel/ghar-linux-release-local`:${date}" `
     -t ghcr.io/glatzel/ghar-linux-release-local:latest `
     -t "ghcr.io/glatzel/ghar-linux-release-local`:v${local_version}-runner-${runner_version}" `
@@ -41,7 +41,7 @@ docker buildx build `
     --build-arg RUNNER_VERSION=$runner_version `
     --target dev-local `
     -t glatzel/ghar-linux-dev-local:latest `
-    -t "glatzel/ghar-linux-dev-local`:v${version}-runner-${runner_version}" `
+    -t "glatzel/ghar-linux-dev-local`:v${local_version}-runner-${runner_version}" `
     -t "glatzel/ghar-linux-dev-local`:v${date}" `
     -t ghcr.io/glatzel/ghar-linux-dev-local:latest `
     -t "ghcr.io/glatzel/ghar-linux-dev-local`:v${local_version}-runner-${runner_version}" `
