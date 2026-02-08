@@ -1,5 +1,5 @@
 #This script invokes GitHub-CLI (Already installed on container image)
-#To use this entrypoint script run: Docker run -e GH_TOKEN='myPatToken' -e GH_OWNER='orgName' -e GH_REPOSITORY='repoName' -d imageName 
+#To use this entrypoint script run: Docker run -e GH_TOKEN='myPatToken' -e GH_OWNER='orgName' -e GH_REPOSITORY='repoName' -d imageName
 Param (
     [Parameter(Mandatory = $false)]
     [string]$owner = $env:GH_OWNER,

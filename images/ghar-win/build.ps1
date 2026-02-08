@@ -30,17 +30,17 @@ docker build `
     .
 Write-Output "::endgroup::"
 if ($env:PUBLISH -eq "true") {
-    docker push glatzel/ghar-win-cloud:latest 
-    docker push glatzel/ghar-win-cloud:v$cloud_version 
-    docker push glatzel/ghar-win-cloud:$date 
-    docker push ghcr.io/glatzel/ghar-win-cloud:latest 
-    docker push ghcr.io/glatzel/ghar-win-cloud:v$cloud_version 
-    docker push ghcr.io/glatzel/ghar-win-cloud:$date 
+    docker push glatzel/ghar-win-cloud:latest
+    docker push glatzel/ghar-win-cloud:v$cloud_version
+    docker push glatzel/ghar-win-cloud:$date
+    docker push ghcr.io/glatzel/ghar-win-cloud:latest
+    docker push ghcr.io/glatzel/ghar-win-cloud:v$cloud_version
+    docker push ghcr.io/glatzel/ghar-win-cloud:$date
 
-    docker push glatzel/ghar-win-local:latest 
-    docker push "glatzel/ghar-win-local`:v${local_version}-runner-${runner_version}" 
-    docker push "glatzel/ghar-win-local`:${date}" 
-    docker push ghcr.io/glatzel/ghar-win-local:latest 
-    docker push "ghcr.io/glatzel/ghar-win-local`:v${local_version}-runner-${runner_version}" 
-    docker push "ghcr.io/glatzel/ghar-win-local`:${date}" 
+    docker push glatzel/ghar-win-local:latest
+    docker push "glatzel/ghar-win-local`:v${local_version}-runner-${runner_version}"
+    docker push "glatzel/ghar-win-local`:${date}"
+    docker push ghcr.io/glatzel/ghar-win-local:latest
+    docker push "ghcr.io/glatzel/ghar-win-local`:v${local_version}-runner-${runner_version}"
+    docker push "ghcr.io/glatzel/ghar-win-local`:${date}"
 }
