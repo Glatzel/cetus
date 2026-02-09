@@ -19,7 +19,7 @@ $buildArgs = @(
     $pushFlag,
     "--platform", "linux/amd64,linux/arm64",
     "--build-arg", "RUNNER_VERSION=$runnerVersion",
-    "-target", "release-local"
+    "--target", "release-local"
 )
 foreach ($image in $images) {
     foreach ($tag in $tags) {
