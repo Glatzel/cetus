@@ -7,7 +7,8 @@ ForEach ($item in (Get-Content $PSScriptRoot/../image.json | ConvertFrom-Json)) 
         "  - ./images/$folder/**">>$yamlFile
         ForEach ($n in $item.name) {
             if ($n -ne $name) {
-                "  - '!./images/$folder/build/$n.ps1'">>$yamlFile
+                "  - '!./images/$folder/**/build-$n.ps1'">>$yamlFile
+                "  - '!./images/$folder/**/$n.Dockerfile'">>$yamlFile
             }
         }
     }

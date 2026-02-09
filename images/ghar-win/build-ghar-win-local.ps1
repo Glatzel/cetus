@@ -1,14 +1,16 @@
-Set-Location $PSScriptRoot/..
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
 $local_version = "0.0.1"
 $runner_version = "2.331.0"
 $date = "2026-02-08"
+docker build `
+    -f ./ghar-win-cloud.Dockerfile `
+    -t cloud
 
 docker build `
     --build-arg RUNNER_VERSION=$runner_version `
-    --target local `
+    -f ./ghar-win-local.Dockerfile
     -t glatzel/ghar-win-local:latest `
     -t "glatzel/ghar-win-local`:v${local_version}-runner-${runner_version}" `
     -t "glatzel/ghar-win-local`:${date}" `
