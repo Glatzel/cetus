@@ -9,13 +9,12 @@ $tags = @(
     "runner-${runnerVersion}"
     "$(Get-Date -Format 'yyyy-MM-dd')"
 )
-$pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
 $images = @(
     "glatzel/ghar-linux-dev-local",
     "ghcr.io/glatzel/ghar-linux-dev-local"
 )
 $buildArgs = @(
-    "buildx", "build",
+  "build",
     $pushFlag,
     "--platform", "linux/amd64,linux/arm64",
     "--build-arg", "RUNNER_VERSION=$runnerVersion",

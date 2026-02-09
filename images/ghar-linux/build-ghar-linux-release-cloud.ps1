@@ -7,14 +7,12 @@ $tags = @(
     "v0.1.2",
     "$(Get-Date -Format 'yyyy-MM-dd')"
 )
-$pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
 $images = @(
     "glatzel/ghar-linux-release-cloud",
     "ghcr.io/glatzel/ghar-linux-release-cloud"
 )
 $buildArgs = @(
-    "buildx", "build",
-    $pushFlag,
+    "build",
     "--platform", "linux/amd64,linux/arm64",
     "-f", "./ghar-linux-release-cloud.Dockerfile"
 )
