@@ -1,6 +1,5 @@
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
-& ./build-pixi-base.ps1
 $tags = @(
     "latest",
     "alma8",

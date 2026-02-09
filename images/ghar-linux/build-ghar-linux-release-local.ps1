@@ -1,7 +1,6 @@
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
-& ./build-pixi-base.ps1
 $runnerVersion = "2.331.0"
 $tags = @(
     "latest"
