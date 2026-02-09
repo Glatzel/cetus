@@ -20,7 +20,7 @@ $buildArgs = @(
     $pushFlag,
     "--platform", "linux/amd64,linux/arm64",
     "--build-arg", "RUNNER_VERSION=$runnerVersion",
-    "-f", "./ghar-linux-release-local.Dockerfile"
+    "-target", "release-local"
 )
 foreach ($image in $images) {
     foreach ($tag in $tags) {

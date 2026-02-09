@@ -16,7 +16,7 @@ $buildArgs = @(
     "buildx", "build",
     $pushFlag,
     "--platform", "linux/amd64,linux/arm64",
-    "-f", "./ghar-linux-release-cloud.Dockerfile"
+    "--target", "release-cloud"
 )
 foreach ($image in $images) {
     foreach ($tag in $tags) {
