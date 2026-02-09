@@ -1,6 +1,5 @@
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
-
 $images = @(
     "glatzel/ghar-win-cloud",
     "ghcr.io/glatzel/ghar-win-cloud"

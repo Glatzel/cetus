@@ -27,5 +27,4 @@ foreach ($image in $images) {
         $buildArgs += "$image`:$tag"
     }
 }
-
 docker @buildArgs .
