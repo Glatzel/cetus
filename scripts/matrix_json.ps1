@@ -5,7 +5,7 @@ foreach ($item in (Get-Content $PSScriptRoot/../image.json | ConvertFrom-Json)) 
             $matrix += [PSCustomObject]@{
                 name    = $name
                 folder  = $item.folder
-                machine = $item.machine
+                machine = $machine
             }
         }
     }
