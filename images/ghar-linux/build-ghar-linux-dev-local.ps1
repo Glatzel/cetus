@@ -14,9 +14,9 @@ docker buildx build `
     -t glatzel/ghar-linux-dev-local:latest `
     -t glatzel/ghar-linux-dev-local:ubuntu-24.04 `
     -t "glatzel/ghar-linux-dev-local`:v${local_version}-runner-${runner_version}" `
-    -t "glatzel/ghar-linux-dev-local`:${date}" `
+    -t glatzel/ghar-linux-dev-local:$date `
     -t ghcr.io/glatzel/ghar-linux-dev-local:latest `
     -t ghcr.io/glatzel/ghar-linux-dev-local:ubuntu-24.04 `
     -t "ghcr.io/glatzel/ghar-linux-dev-local`:v${local_version}-runner-${runner_version}" `
-    -t "ghcr.io/glatzel/ghar-linux-dev-local`:${date}" `
+    -t ghcr.io/glatzel/ghar-linux-dev-local:date `
     .

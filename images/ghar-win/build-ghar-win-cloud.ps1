@@ -8,9 +8,11 @@ docker build `
     -t glatzel/ghar-win-cloud:latest `
     -t glatzel/ghar-win-cloud:v$cloud_version `
     -t glatzel/ghar-win-cloud:$date `
+    -t glatzel/ghar-win-cloud:ltsc2025 `
     -t ghcr.io/glatzel/ghar-win-cloud:latest `
     -t ghcr.io/glatzel/ghar-win-cloud:v$cloud_version `
     -t ghcr.io/glatzel/ghar-win-cloud:$date `
+    -t ghcr.io/glatzel/ghar-win-cloud:ltsc2025 `
     .
 
 docker image ls
@@ -22,4 +24,5 @@ if ($env:PUBLISH -eq "true") {
     docker push ghcr.io/glatzel/ghar-win-cloud:latest
     docker push ghcr.io/glatzel/ghar-win-cloud:v$cloud_version
     docker push ghcr.io/glatzel/ghar-win-cloud:$date
+    
 }

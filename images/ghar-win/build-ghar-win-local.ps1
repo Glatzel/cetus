@@ -11,20 +11,22 @@ docker build `
 docker build `
     --build-arg RUNNER_VERSION=$runner_version `
     -f ./ghar-win-local.Dockerfile
-    -t glatzel/ghar-win-local:latest `
+-t glatzel/ghar-win-local:latest `
     -t "glatzel/ghar-win-local`:v${local_version}-runner-${runner_version}" `
-    -t "glatzel/ghar-win-local`:${date}" `
+    -t glatzel/ghar-win-local:$date `
+    -t glatzel/ghar-win-local:ltsc2025 `
     -t ghcr.io/glatzel/ghar-win-local:latest `
     -t "ghcr.io/glatzel/ghar-win-local`:v${local_version}-runner-${runner_version}" `
-    -t "ghcr.io/glatzel/ghar-win-local`:${date}" `
+    -t ghcr.io/glatzel/ghar-win-local:$date `
+    -t ghcr.io/glatzel/ghar-win-local:ltsc2025 `
     .
 docker image ls
 docker history glatzel/ghar-win-local:latest
 if ($env:PUBLISH -eq "true") {
     docker push glatzel/ghar-win-local:latest
     docker push "glatzel/ghar-win-local`:v${local_version}-runner-${runner_version}"
-    docker push "glatzel/ghar-win-local`:${date}"
+    docker push glatzel/ghar-win-local:$date
     docker push ghcr.io/glatzel/ghar-win-local:latest
-    docker push "ghcr.io/glatzel/ghar-win-local`:v${local_version}-runner-${runner_version}"
-    docker push "ghcr.io/glatzel/ghar-win-local`:${date}"
+    docker push "ghcr.io/glatzel/ghar-win-local:v${local_version}-runner-${runner_version}"
+    docker push ghcr.io/glatzel/ghar-win-local:$date
 }

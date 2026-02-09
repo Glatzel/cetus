@@ -14,9 +14,9 @@ docker buildx build `
     -t glatzel/ghar-linux-release-local:latest `
     -t glatzel/ghar-linux-release-local:alma8 `
     -t "glatzel/ghar-linux-release-local`:v${local_version}-runner-${runner_version}" `
-    -t "glatzel/ghar-linux-release-local`:${date}" `
+    -t glatzel/ghar-linux-release-local:$date `
     -t ghcr.io/glatzel/ghar-linux-release-local:latest `
     -t ghcr.io/glatzel/ghar-linux-release-local:alma8 `
     -t "ghcr.io/glatzel/ghar-linux-release-local`:v${local_version}-runner-${runner_version}" `
-    -t "ghcr.io/glatzel/ghar-linux-release-local`:${date}" `
+    -t ghcr.io/glatzel/ghar-linux-release-local:$date `
     .
