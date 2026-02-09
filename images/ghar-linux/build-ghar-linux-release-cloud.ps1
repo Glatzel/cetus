@@ -1,5 +1,7 @@
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
+Get-Content "./pixi-base.Dockerfile" > Dockerfile
+Get-Content "./release-cloud.Dockerfile" >> Dockerfile
 $tags = @(
     "latest",
     "alma8",

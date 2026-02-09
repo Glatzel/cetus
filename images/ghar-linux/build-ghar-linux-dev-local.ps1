@@ -1,5 +1,7 @@
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
+Get-Content "./pixi-base.Dockerfile" > Dockerfile
+Get-Content "./dev-local.Dockerfile" >> Dockerfile
 $runnerVersion = "2.331.0"
 $tags = @(
     "latest"
