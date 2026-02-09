@@ -2,7 +2,7 @@ $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
 $cloudVersion = "0.0.1"
-$date         = "2026-02-08"
+$date = Get-Date -Format "yyyy-MM-dd"
 
 $images = @(
     "glatzel/ghar-win-cloud",

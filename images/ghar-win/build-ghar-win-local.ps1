@@ -3,7 +3,7 @@ $PSNativeCommandUseErrorActionPreference = $true
 
 $localVersion = "0.0.1"
 $runnerVersion = "2.331.0"
-$date = "2026-02-08"
+$date = Get-Date -Format "yyyy-MM-dd"
 
 $images = @(
     "glatzel/ghar-win-local",

@@ -3,9 +3,9 @@ $PSNativeCommandUseErrorActionPreference = $true
 
 & ./build-pixi-base.ps1
 
-$localVersion  = "0.0.5"
+$localVersion = "0.0.5"
 $runnerVersion = "2.331.0"
-$date          = "2026-02-08"
+$date = Get-Date -Format "yyyy-MM-dd"
 
 $pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
 
