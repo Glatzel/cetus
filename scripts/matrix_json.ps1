@@ -5,6 +5,7 @@ foreach ($item in (Get-Content $PSScriptRoot/../image.json | ConvertFrom-Json)) 
             name    = $name
             folder  = $item.folder
             machine = $item.machine
+            cross   = $item.cross
         }
     }
 }
