@@ -1,10 +1,12 @@
 $matrix = @()
-$csvData = Import-Csv "$PSScriptRoot/../images.csv"
-foreach ($row in $csvData) {
-    $matrix += [PSCustomObject]@{
-        img     = $row.img
-        machine = $row.machine
-        cross   = $row.cross
+foreach ($item in (Get-Content $PSScriptRoot/../image.json | ConvertFrom-Json)) {
+    ForEach ($name in $item.name) {
+        $matrix += [PSCustomObject]@{
+            name    = $name
+            folder  = $item.folder
+            machine = $item.machine
+            cross   = $item.cross
+        }
     }
 }
 $matrix = @{ include = $matrix } | ConvertTo-Json -Depth 10 -Compress | jq '.'
@@ -12,10 +14,10 @@ $matrix = @{ include = $matrix } | ConvertTo-Json -Depth 10 -Compress | jq '.'
 $env:CHANGED_KEYS = "${env:CHANGED_KEYS}".Replace("\", "")
 switch ($env:GITHUB_EVENT_NAME) {
     "push" {
-        $matrix = $matrix | jq -c --argjson images "${env:CHANGED_KEYS}" '{include: .include | map(select(.img as $p | $images | index($p)))}'
+        $matrix = $matrix | jq -c --argjson images "${env:CHANGED_KEYS}" '{include: .include | map(select(.name as $p | $images | index($p)))}'
     }
     "pull_request" {
-        $matrix = $matrix | jq -c --argjson images "${env:CHANGED_KEYS}" '{include: .include | map(select(.img as $p | $images | index($p)))}'
+        $matrix = $matrix | jq -c --argjson images "${env:CHANGED_KEYS}" '{include: .include | map(select(.name as $p | $images | index($p)))}'
     }
     default {
         $matrix = $matrix
