@@ -1,10 +1,12 @@
 $matrix = @()
 foreach ($item in (Get-Content $PSScriptRoot/../image.json | ConvertFrom-Json)) {
     ForEach ($name in $item.name) {
-        $matrix += [PSCustomObject]@{
-            name    = $name
-            folder  = $item.folder
-            machine = $item.machine
+        ForEach ($machine in $item.machine) {
+            $matrix += [PSCustomObject]@{
+                name    = $name
+                folder  = $item.folder
+                machine = $item.machine
+            }
         }
     }
 }
