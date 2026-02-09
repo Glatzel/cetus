@@ -16,6 +16,7 @@ $tags = @(
 
 docker build `
     -f ./ghar-win-cloud.Dockerfile `
+    -t cloud `
     .
 
 $buildArgs = @(
