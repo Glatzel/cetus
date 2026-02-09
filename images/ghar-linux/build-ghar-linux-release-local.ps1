@@ -2,25 +2,19 @@ $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
 & ./build-pixi-base.ps1
-
-$localVersion = "0.0.5"
 $runnerVersion = "2.331.0"
-$date = Get-Date -Format "yyyy-MM-dd"
-
+$tags = @(
+    "latest"
+    "alma8"
+    "v0.0.5"
+    "runner-${runnerVersion}"
+    "$(Get-Date -Format 'yyyy-MM-dd')"
+)
 $pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
 
 $images = @(
     "glatzel/ghar-linux-release-local",
     "ghcr.io/glatzel/ghar-linux-release-local"
-)
-
-$versionTag = "v${localVersion}-runner-${runnerVersion}"
-
-$tags = @(
-    "latest",
-    "alma8",
-    $versionTag,
-    $date
 )
 
 $buildArgs = @(

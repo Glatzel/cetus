@@ -1,21 +1,16 @@
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
-$localVersion = "0.0.1"
 $runnerVersion = "2.331.0"
-$date = Get-Date -Format "yyyy-MM-dd"
-
 $images = @(
     "glatzel/ghar-win-local",
     "ghcr.io/glatzel/ghar-win-local"
 )
-
-$versionTag = "v${localVersion}-runner-${runnerVersion}"
-
 $tags = @(
-    "latest",
-    $versionTag,
-    $date,
+    "latest"
+    "v0.0.1"
+    "runner-${runnerVersion}"
+    "$(Get-Date -Format 'yyyy-MM-dd')"
     "ltsc2025"
 )
 
