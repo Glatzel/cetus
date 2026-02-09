@@ -1,22 +1,41 @@
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
-& ./build-pixi-base.ps1
-$pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
-$local_version = "0.0.5"
-$runner_version = "2.331.0"
-$date = "2026-02-08"
 
-docker buildx build `
-    $pushFlag `
-    --platform 'linux/amd64,linux/arm64' `
-    --build-arg RUNNER_VERSION=$runner_version `
-    -f ./ghar-linux-release-local.Dockerfile `
-    -t glatzel/ghar-linux-release-local:latest `
-    -t glatzel/ghar-linux-release-local:alma8 `
-    -t "glatzel/ghar-linux-release-local`:v${local_version}-runner-${runner_version}" `
-    -t glatzel/ghar-linux-release-local:$date `
-    -t ghcr.io/glatzel/ghar-linux-release-local:latest `
-    -t ghcr.io/glatzel/ghar-linux-release-local:alma8 `
-    -t "ghcr.io/glatzel/ghar-linux-release-local`:v${local_version}-runner-${runner_version}" `
-    -t ghcr.io/glatzel/ghar-linux-release-local:$date `
-    .
+& ./build-pixi-base.ps1
+
+$localVersion  = "0.0.5"
+$runnerVersion = "2.331.0"
+$date          = "2026-02-08"
+
+$pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
+
+$images = @(
+    "glatzel/ghar-linux-release-local",
+    "ghcr.io/glatzel/ghar-linux-release-local"
+)
+
+$versionTag = "v${localVersion}-runner-${runnerVersion}"
+
+$tags = @(
+    "latest",
+    "alma8",
+    $versionTag,
+    $date
+)
+
+$buildArgs = @(
+    "buildx", "build",
+    $pushFlag,
+    "--platform", "linux/amd64,linux/arm64",
+    "--build-arg", "RUNNER_VERSION=$runnerVersion",
+    "-f", "./ghar-linux-release-local.Dockerfile"
+)
+
+foreach ($image in $images) {
+    foreach ($tag in $tags) {
+        $buildArgs += "-t"
+        $buildArgs += "$image`:$tag"
+    }
+}
+
+docker @buildArgs .

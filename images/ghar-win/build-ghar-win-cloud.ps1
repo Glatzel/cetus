@@ -1,28 +1,40 @@
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
-$cloud_version = "0.0.1"
-$date = "2026-02-08"
-docker build `
-    -f ghar-win-cloud.Dockerfile `
-    -t glatzel/ghar-win-cloud:latest `
-    -t glatzel/ghar-win-cloud:v$cloud_version `
-    -t glatzel/ghar-win-cloud:$date `
-    -t glatzel/ghar-win-cloud:ltsc2025 `
-    -t ghcr.io/glatzel/ghar-win-cloud:latest `
-    -t ghcr.io/glatzel/ghar-win-cloud:v$cloud_version `
-    -t ghcr.io/glatzel/ghar-win-cloud:$date `
-    -t ghcr.io/glatzel/ghar-win-cloud:ltsc2025 `
-    .
+$cloudVersion = "0.0.1"
+$date         = "2026-02-08"
+
+$images = @(
+    "glatzel/ghar-win-cloud",
+    "ghcr.io/glatzel/ghar-win-cloud"
+)
+
+$tags = @(
+    "latest",
+    "v$cloudVersion",
+    $date,
+    "ltsc2025"
+)
+
+# build args
+$buildArgs = @("-f", "ghar-win-cloud.Dockerfile")
+
+foreach ($image in $images) {
+    foreach ($tag in $tags) {
+        $buildArgs += "-t"
+        $buildArgs += "$image`:$tag"
+    }
+}
+
+docker build @buildArgs .
 
 docker image ls
 docker history glatzel/ghar-win-cloud:latest
+
 if ($env:PUBLISH -eq "true") {
-    docker push glatzel/ghar-win-cloud:latest
-    docker push glatzel/ghar-win-cloud:v$cloud_version
-    docker push glatzel/ghar-win-cloud:$date
-    docker push ghcr.io/glatzel/ghar-win-cloud:latest
-    docker push ghcr.io/glatzel/ghar-win-cloud:v$cloud_version
-    docker push ghcr.io/glatzel/ghar-win-cloud:$date
-    
+    foreach ($image in $images) {
+        foreach ($tag in $tags | Where-Object { $_ -ne "ltsc2025" }) {
+            docker push "$image`:$tag"
+        }
+    }
 }
