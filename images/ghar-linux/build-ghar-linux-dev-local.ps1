@@ -5,7 +5,7 @@ Get-Content "./dev-local.Dockerfile" >> Dockerfile
 $runnerVersion = "2.331.0"
 $tags = @(
     "latest"
-    "alma8"
+    "ubuntu-24.04"
     "v0.0.5"
     "runner-${runnerVersion}"
     "$(Get-Date -Format 'yyyy-MM-dd')"
