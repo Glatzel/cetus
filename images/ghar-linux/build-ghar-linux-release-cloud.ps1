@@ -13,6 +13,7 @@ $images = @(
 )
 $buildArgs = @(
     "build",
+    "--platform", "linux/amd64,linux/arm64",
     "-f", "./ghar-linux-release-cloud.Dockerfile"
 )
 foreach ($image in $images) {

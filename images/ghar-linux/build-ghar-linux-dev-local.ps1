@@ -16,6 +16,7 @@ $images = @(
 $buildArgs = @(
   "build",
     $pushFlag,
+    "--platform", "linux/amd64,linux/arm64",
     "--build-arg", "RUNNER_VERSION=$runnerVersion",
     "-f", "./ghar-linux-dev-local.Dockerfile"
 )

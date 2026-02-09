@@ -1,24 +1,21 @@
 [
     {
         "folder": "ghar-linux",
-        "machine": [
-            "ubuntu-latest",
-            "ubuntu-24.04-arm"
-        ],
+        "machine": "ubuntu-latest",
         "name": [
             "ghar-linux-release-cloud",
             "ghar-linux-release-local",
             "ghar-linux-dev-local"
-        ]
+        ],
+        "cross": true
     },
     {
         "folder": "ghar-win",
-        "machine": [
-            "windows-latest"
-        ],
+        "machine": "windows-latest",
         "name": [
             "ghar-win-cloud",
             "ghar-win-local"
-        ]
+        ],
+        "cross": false
     }
 ]
