@@ -1,9 +1,8 @@
 $matrix = @()
-foreach ($item in (Get-Content $PSScriptRoot/../image.json | ConvertFrom-Json)) {
+foreach ($item in (Get-Content $PSScriptRoot/../image.json | ConvertFrom-Csv)) {
     ForEach ($name in $item.name) {
         $matrix += [PSCustomObject]@{
             name    = $name
-            folder  = $item.folder
             machine = $item.machine
             cross   = $item.cross
         }

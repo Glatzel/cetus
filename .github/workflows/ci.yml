@@ -84,6 +84,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         id: build
-        run: ./build-${{matrix.name}}.ps1
-        working-directory: images/${{matrix.folder}}
+        run: ./build.ps1
+        working-directory: images/${{matrix.name}}
         shell: pwsh
