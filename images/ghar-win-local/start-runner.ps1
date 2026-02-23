@@ -23,14 +23,14 @@ $runnerName = $runnerBaseName + (((New-Guid).Guid).replace("-", "")).substring(0
 try {
     #Register new runner instance
     write-host "Registering GitHub Self Hosted Runner on: $owner/$repo"
-    ./config.cmd --unattended --url "https://github.com/$owner/$repo" --token $regToken --name $runnerName
+    ./.pixi/envs/runner/config.cmd --unattended --url "https://github.com/$owner/$repo" --token $regToken --name $runnerName
 
     #Remove PAT token after registering new instance
     $pat=$null
     $env:GH_TOKEN=$null
 
     #Start runner listener for jobs
-    ./run.cmd
+    ./.pixi/envs/runner/run.cmd
 }
 catch {
     Write-Error $_.Exception.Message
@@ -39,5 +39,5 @@ finally {
     # Trap signal with finally - cleanup (When docker container is stopped remove runner registration from GitHub)
     # Does not currently work due to issue: https://github.com/moby/moby/issues/25982#
     # Perform manual cleanup of stale runners using Cleanup-Runners.ps1
-    ./config.cmd remove --unattended --token $regToken
+    ./.pixi/envs/runner/config.cmd remove --unattended --token $regToken
 }

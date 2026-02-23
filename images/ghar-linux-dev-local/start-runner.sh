@@ -13,7 +13,7 @@ REG_TOKEN=$(curl -sX POST -H "Accept: application/vnd.github.v3+json" -H "Author
 
 cd /home/runner/actions-runner
 
-./config.sh --unattended --url https://github.com/${GH_OWNER}/${GH_REPOSITORY} --token ${REG_TOKEN} --name ${RUNNER_NAME}
+./.pixi/envs/runner/config.sh --unattended --url https://github.com/${GH_OWNER}/${GH_REPOSITORY} --token ${REG_TOKEN} --name ${RUNNER_NAME}
 
 cleanup() {
     echo "Removing runner..."
@@ -23,4 +23,4 @@ cleanup() {
 trap 'cleanup; exit 130' INT
 trap 'cleanup; exit 143' TERM
 
-./run.sh & wait $!
+./.pixi/envs/runner/run.sh & wait $!
