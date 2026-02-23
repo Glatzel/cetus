@@ -87,3 +87,9 @@ jobs:
         run: ./build.ps1
         working-directory: images/${{matrix.name}}
         shell: pwsh
+  check-point:
+    if: ( cancelled() || failure() ) && github.event_name == 'pull_request'
+    needs: [build, dispatch]
+    runs-on: ubuntu-slim
+    steps:
+      - run: exit 1
