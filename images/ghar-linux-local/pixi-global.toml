@@ -35,4 +35,4 @@ zstd = "zstd"
 [envs.runner]
 channels = ["https://prefix.dev/glatzel"]
 [envs.runner.dependencies]
-github-action-runner="*"
+github-action-runner = "*"
