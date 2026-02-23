@@ -1,20 +1,34 @@
 [
     {
-        "folder": "ghar-linux",
+        "folder": "ghar-linux-cloud",
         "machine": "ubuntu-latest",
         "name": [
-            "ghar-linux-release-cloud",
+            "ghar-linux-release-cloud"
+        ],
+        "cross": true
+    },
+    {
+        "folder": "ghar-linux-local",
+        "machine": "ubuntu-latest",
+        "name": [
             "ghar-linux-release-local",
             "ghar-linux-dev-local"
         ],
         "cross": true
     },
     {
-        "folder": "ghar-win",
+        "folder": "ghar-win-local",
         "machine": "windows-latest",
         "name": [
-            "ghar-win-cloud",
             "ghar-win-local"
+        ],
+        "cross": false
+    },
+    {
+        "folder": "ghar-win-cloud",
+        "machine": "windows-latest",
+        "name": [
+            "ghar-win-cloud"
         ],
         "cross": false
     }

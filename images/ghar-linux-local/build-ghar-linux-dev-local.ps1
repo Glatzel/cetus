@@ -1,12 +1,12 @@
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 Get-Content "./pixi-base.Dockerfile" > Dockerfile
-Get-Content "./dev-local.Dockerfile" >> Dockerfile
+Get-Content "./ghar-linux-dev-local.Dockerfile" >> Dockerfile
 $runnerVersion = "2.331.0"
 $tags = @(
     "latest"
     "ubuntu-24.04"
-    "v0.0.5"
+    "v0.0.6"
     "runner-${runnerVersion}"
     "$(Get-Date -Format 'yyyy-MM-dd')"
 )

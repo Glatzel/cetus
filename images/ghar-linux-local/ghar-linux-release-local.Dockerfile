@@ -1,4 +1,4 @@
-FROM ubuntu:24.04 AS dev-local
+FROM almalinux:8 AS release-local
 ARG RUNNER_VERSION
 RUN useradd -m runner
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
@@ -7,11 +7,10 @@ COPY ./start-runner.sh start-runner.sh
 RUN chmod +x start-runner.sh
 COPY ./download-action-runner.sh download-action-runner.sh
 RUN sh download-action-runner.sh
-RUN chown -R runner /home/runner/actions-runner/bin/installdependencies.sh && \
-    rm -rf /var/lib/apt/lists/* && \
-    apt clean && \
-    apt autoclean && \
-    apt autoremove -y
+RUN chown -R runner /home/runner/.pixi/envs/runner/bin/installdependencies.sh && \
+    rm -rf /var/cache/dnf/* && \
+    dnf clean all && \
+    dnf autoremove -y
 USER runner
 RUN pixi global list
 ENTRYPOINT ["./start-runner.sh"]

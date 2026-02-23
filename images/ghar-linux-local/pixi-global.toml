@@ -1,0 +1,38 @@
+[envs.base]
+channels = ["https://prefix.dev/glatzel", "conda-forge"]
+
+[envs.base.dependencies]
+7-zip = "*"
+aria2 = "*"
+ca-certificates = "*"
+curl = "*"
+gh = "*"
+git = "*"
+gzip = "*"
+jq = "*"
+powershell = "*"
+tar = "*"
+unzip = "*"
+wget = "*"
+zip = "*"
+zstd = "*"
+
+[envs.base.exposed]
+7z = "7z"
+aria2 = "aria2c"
+curl = "curl"
+gh = "gh"
+git = "git"
+gzip = "gzip"
+jq = "jq"
+pwsh = "pwsh"
+tar = "tar"
+unzip = "unzip"
+wget = "wget"
+zip = "zip"
+zstd = "zstd"
+
+[envs.runner]
+channels = ["https://prefix.dev/glatzel"]
+[envs.runner.dependencies]
+github-action-runner="*"

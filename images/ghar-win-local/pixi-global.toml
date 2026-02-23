@@ -1,0 +1,22 @@
+[envs.base]
+channels = ["https://prefix.dev/glatzel", "conda-forge"]
+
+[envs.base.dependencies]
+7-zip = "*"
+aria2 = "*"
+curl = "*"
+gh = "*"
+git = "*"
+jq = "*"
+powershell = "*"
+zstd = "*"
+
+[envs.base.exposed]
+7z = "7z"
+aria2 = "aria2c"
+curl = "curl"
+gh = "gh"
+git = "git"
+jq = "jq"
+pwsh = "pwsh"
+zstd = "zstd"
