@@ -17,6 +17,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  lefthook:
+    uses: ./.github/workflows/ci-lefthook.yml
   dispatch:
     runs-on: ubuntu-slim
     outputs:
@@ -90,7 +92,7 @@ jobs:
         shell: pwsh
   check-point:
     if: ( cancelled() || failure() ) && github.event_name == 'pull_request'
-    needs: [build, dispatch]
+    needs: [lefthook, build, dispatch]
     runs-on: ubuntu-slim
     steps:
       - run: exit 1
