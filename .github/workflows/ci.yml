@@ -43,6 +43,7 @@ jobs:
         shell: pwsh
 
   build:
+    if: ${{needs.dispatch.outputs.matrix != '' }}
     permissions:
       contents: read
       packages: write
