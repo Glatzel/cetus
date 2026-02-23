@@ -15,8 +15,7 @@ $tags = @(
 )
 
 $buildArgs = @(
-    "--build-arg", "RUNNER_VERSION=$runnerVersion",
-    "-f", "./ghar-win-local.Dockerfile"
+    "--build-arg", "RUNNER_VERSION=$runnerVersion"
 )
 
 foreach ($image in $images) {
