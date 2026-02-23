@@ -27,7 +27,5 @@ if ($($matrix | jq '.include | length == 0') -eq 'true') {
 }
 # Output matrix to GitHub Actions
 "matrix=$matrix" >> $env:GITHUB_OUTPUT
-
-Write-Output "::group::json"
 $matrix | jq .
-Write-Output "::endgroup::"
+
