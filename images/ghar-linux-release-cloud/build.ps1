@@ -1,26 +1,21 @@
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
-Get-Content "./pixi-base.Dockerfile" > Dockerfile
-Get-Content "./dev-local.Dockerfile" >> Dockerfile
-$runnerVersion = "2.331.0"
 $tags = @(
-    "latest"
-    "ubuntu-24.04"
-    "v0.0.5"
-    "runner-${runnerVersion}"
+    "latest",
+    "alma8",
+    "v0.1.2",
     "$(Get-Date -Format 'yyyy-MM-dd')"
 )
 $pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
 $images = @(
-    "glatzel/ghar-linux-dev-local",
-    "ghcr.io/glatzel/ghar-linux-dev-local"
+    "glatzel/ghar-linux-release-cloud",
+    "ghcr.io/glatzel/ghar-linux-release-cloud"
 )
 $buildArgs = @(
     "buildx", "build",
     $pushFlag,
     "--platform", "linux/amd64,linux/arm64",
-    "--build-arg", "RUNNER_VERSION=$runnerVersion",
-    "--target", "dev-local"
+    "--target", "release-cloud"
 )
 foreach ($image in $images) {
     foreach ($tag in $tags) {

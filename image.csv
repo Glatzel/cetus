@@ -1,0 +1,6 @@
+name,machine,cross
+ghar-linux-release-cloud,ubuntu-latest,true
+ghar-linux-release-local,ubuntu-latest,true
+ghar-linux-dev-local,ubuntu-latest,true
+ghar-win-cloud,windows-latest,false
+ghar-win-local,windows-latest,false

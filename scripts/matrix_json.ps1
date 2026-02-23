@@ -1,9 +1,8 @@
 $matrix = @()
-foreach ($item in (Get-Content $PSScriptRoot/../image.json | ConvertFrom-Json)) {
+foreach ($item in (Get-Content $PSScriptRoot/../image.csv | ConvertFrom-Csv)) {
     ForEach ($name in $item.name) {
         $matrix += [PSCustomObject]@{
             name    = $name
-            folder  = $item.folder
             machine = $item.machine
             cross   = $item.cross
         }
@@ -23,10 +22,9 @@ switch ($env:GITHUB_EVENT_NAME) {
         $matrix = $matrix
     }
 }
-
+if ($($matrix | jq '.include | length == 0') -eq 'true') {
+    $matrix = $null
+}
 # Output matrix to GitHub Actions
 "matrix=$matrix" >> $env:GITHUB_OUTPUT
-
-Write-Output "::group::json"
 $matrix | jq .
-Write-Output "::endgroup::"
