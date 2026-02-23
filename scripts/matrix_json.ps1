@@ -22,7 +22,9 @@ switch ($env:GITHUB_EVENT_NAME) {
         $matrix = $matrix
     }
 }
-
+if ($($matrix | jq '.include | length == 0') -eq 'true') {
+    $matrix = $null
+}
 # Output matrix to GitHub Actions
 "matrix=$matrix" >> $env:GITHUB_OUTPUT
 
