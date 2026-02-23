@@ -28,4 +28,3 @@ if ($($matrix | jq '.include | length == 0') -eq 'true') {
 # Output matrix to GitHub Actions
 "matrix=$matrix" >> $env:GITHUB_OUTPUT
 $matrix | jq .
-
