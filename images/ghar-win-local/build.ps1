@@ -11,6 +11,7 @@ $tags = @(
     "$(Get-Date -Format 'yyyy-MM-dd')"
     "ltsc2025"
 )
+$buildArgs = @()
 foreach ($image in $images) {
     foreach ($tag in $tags) {
         $buildArgs += "-t"
