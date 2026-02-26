@@ -1,7 +1,6 @@
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
-$runnerVersion = "2.331.0"
 $images = @(
     "glatzel/ghar-win-local",
     "ghcr.io/glatzel/ghar-win-local"
@@ -9,15 +8,10 @@ $images = @(
 $tags = @(
     "latest"
     "v0.0.2"
-    "runner-${runnerVersion}"
     "$(Get-Date -Format 'yyyy-MM-dd')"
     "ltsc2025"
 )
-
-$buildArgs = @(
-    "--build-arg", "RUNNER_VERSION=$runnerVersion"
-)
-
+$buildArgs = @()
 foreach ($image in $images) {
     foreach ($tag in $tags) {
         $buildArgs += "-t"

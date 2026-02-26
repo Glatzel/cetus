@@ -5,6 +5,5 @@ COPY ./pixi-global.toml C:/Users/ContainerAdministrator/.pixi/manifests/pixi-glo
 RUN pixi global update & pixi clean cache -y
 SHELL ["pwsh", "-Command","$ErrorActionPreference='Stop'; $PSNativeCommandUseErrorActionPreference=$true;"]
 ENTRYPOINT ["pwsh", "-Command","$ErrorActionPreference='Stop'; $PSNativeCommandUseErrorActionPreference=$true;"]
-ARG RUNNER_VERSION
 ADD ./start-runner.ps1 .
 ENTRYPOINT ["pwsh", "./start-runner.ps1"]
