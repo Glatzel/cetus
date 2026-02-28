@@ -34,3 +34,10 @@ zstd = "zstd"
 channels = ["https://prefix.dev/glatzel"]
 [envs.runner.dependencies]
 github-action-runner = "*"
+
+[envs.powershell]
+channels = ["conda-forge"]
+[envs.powershell.dependencies]
+powershell = "*"
+[envs.powershell.exposed]
+pwsh = "pwsh"
