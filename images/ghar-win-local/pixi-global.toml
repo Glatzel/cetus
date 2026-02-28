@@ -20,7 +20,7 @@ jq = "jq"
 zstd = "zstd"
 
 [envs.powershell]
-channels = ["https://prefix.dev/glatzel", "conda-forge"]
+channels = ["conda-forge"]
 [envs.powershell.dependencies]
 powershell = "*"
 [envs.powershell.exposed]
