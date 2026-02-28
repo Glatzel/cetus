@@ -3,7 +3,7 @@ $PSNativeCommandUseErrorActionPreference = $true
 $tags = @(
     "latest"
     "ubuntu-24.04"
-    "v0.0.6"
+    "v0.0.7"
     "$(Get-Date -Format 'yyyy-MM-dd')"
 )
 $pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
