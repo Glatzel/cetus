@@ -10,7 +10,6 @@ gh = "*"
 git = "*"
 gzip = "*"
 jq = "*"
-powershell = "*"
 tar = "*"
 unzip = "*"
 wget = "*"
@@ -25,9 +24,15 @@ gh = "gh"
 git = "git"
 gzip = "gzip"
 jq = "jq"
-pwsh = "pwsh"
 tar = "tar"
 unzip = "unzip"
 wget = "wget"
 zip = "zip"
 zstd = "zstd"
+
+[envs.powershell]
+channels = ["https://prefix.dev/glatzel", "conda-forge"]
+[envs.powershell.dependencies]
+powershell = "*"
+[envs.powershell.exposed]
+pwsh = "pwsh"
