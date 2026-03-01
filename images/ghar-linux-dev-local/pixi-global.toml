@@ -8,13 +8,7 @@ ca-certificates = "*"
 curl = "*"
 gh = "*"
 git = "*"
-gzip = "*"
 jq = "*"
-tar = "*"
-unzip = "*"
-wget = "*"
-zip = "*"
-zstd = "*"
 
 [envs.base.exposed]
 7z = "7z"
@@ -22,13 +16,7 @@ aria2 = "aria2c"
 curl = "curl"
 gh = "gh"
 git = "git"
-gzip = "gzip"
 jq = "jq"
-tar = "tar"
-unzip = "unzip"
-wget = "wget"
-zip = "zip"
-zstd = "zstd"
 
 [envs.runner]
 channels = ["https://prefix.dev/glatzel"]

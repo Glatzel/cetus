@@ -8,7 +8,6 @@ curl = "*"
 gh = "*"
 git = "*"
 jq = "*"
-zstd = "*"
 
 [envs.base.exposed]
 7z = "7z"
@@ -17,7 +16,6 @@ curl = "curl"
 gh = "gh"
 git = "git"
 jq = "jq"
-zstd = "zstd"
 
 [envs.powershell]
 channels = ["conda-forge"]
