@@ -92,6 +92,16 @@ jobs:
         run: ./build.ps1
         working-directory: images/${{matrix.name}}
         shell: pwsh
+      - name: Docker Scout
+        uses: docker/scout-action@v1
+        with:
+          command: quickview,compare,cves,recommendations,sbom,environment,attestation-add
+          to-latest: true
+          ignore-base: true
+          ignore-unchanged: true
+          only-fixed: true
+          write-comment: true
+          summary: true
   check-point:
     if: ( cancelled() || failure() ) && github.event_name == 'pull_request'
     needs: [lefthook, build, dispatch]
