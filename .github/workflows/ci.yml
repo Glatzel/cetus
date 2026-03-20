@@ -90,18 +90,10 @@ jobs:
         run: ./build.ps1
         working-directory: images/${{matrix.name}}
         shell: pwsh
-      - name: Extract Docker metadata
-        if: ${{ github.event_name == 'pull_request' }}
-        id: meta
-        uses: docker/metadata-action@v4.4.0
-        with:
-          images: glatzel/${{ matrix.name }}
-            ghcr.io/glatzel/${{ matrix.name }}
       - name: Docker Scout
         uses: docker/scout-action@f8c776824083494ab0d56b8105ba2ca85c86e4de # v1.18.2
         if: ${{ github.event_name == 'pull_request' }}
         with:
-          image: ${{ steps.meta.outputs.tags }}
           command: quickview,compare,cves,recommendations,sbom
           to-latest: true
           ignore-unchanged: true
