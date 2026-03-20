@@ -83,6 +83,14 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ github.token }}
+      - name: Extract Docker metadata
+        if: ${{ github.event_name == 'pull_request' }}
+        id: meta
+        uses: docker/metadata-action@v4.4.0
+        with:
+          images: 
+            glatzel/${{ matrix.name }}
+            ghcr.io/glatzel/${{ matrix.name }}
       - name: Build Docker image
         env:
           GH_TOKEN: ${{ github.token }}
@@ -94,7 +102,8 @@ jobs:
         uses: docker/scout-action@f8c776824083494ab0d56b8105ba2ca85c86e4de # v1.18.2
         if: ${{ github.event_name == 'pull_request' }}
         with:
-          command: quickview,compare,cves,recommendations,sbom,attestation-add
+          image: ${{ steps.meta.outputs.tags }}
+          command: quickview,compare,cves,recommendations,sbom
           to-latest: true
           ignore-unchanged: true
           only-fixed: true
