@@ -16,6 +16,8 @@ $buildArgs = @(
     $pushFlag,
     "--platform", "linux/amd64,linux/arm64",
     "--target", "release-local"
+    "--provenance=true"
+    "--sbom=true"
 )
 foreach ($image in $images) {
     foreach ($tag in $tags) {
