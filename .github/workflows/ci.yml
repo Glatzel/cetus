@@ -109,7 +109,6 @@ jobs:
           only-fixed: true
           write-comment: true
           summary: true
-          organization: glatzel
   check-point:
     if: ( cancelled() || failure() ) && github.event_name == 'pull_request'
     needs: [lefthook, build, dispatch]
