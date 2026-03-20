@@ -102,7 +102,6 @@ jobs:
         uses: docker/scout-action@f8c776824083494ab0d56b8105ba2ca85c86e4de # v1.18.2
         if: ${{ github.event_name == 'pull_request' }}
         with:
-          image: ${{ steps.meta.outputs.tags }}
           command: quickview,compare,cves,recommendations,sbom
           to-latest: true
           ignore-unchanged: true
