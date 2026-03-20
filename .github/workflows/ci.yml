@@ -108,7 +108,6 @@ jobs:
           only-fixed: true
           write-comment: true
           summary: true
-          ignore-base: true
           organization: glatzel
   check-point:
     if: ( cancelled() || failure() ) && github.event_name == 'pull_request'
