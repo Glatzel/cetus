@@ -18,6 +18,8 @@ concurrency:
 
 jobs:
   lefthook:
+    permissions:
+      contents: write
     uses: ./.github/workflows/ci-lefthook.yml
   dispatch:
     runs-on: ubuntu-slim
