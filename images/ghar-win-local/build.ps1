@@ -18,12 +18,7 @@ foreach ($image in $images) {
         $buildArgs += "$image`:$tag"
     }
 }
-
 docker build @buildArgs .
-
-docker image ls
-docker history glatzel/ghar-win-local:latest
-
 if ($env:PUBLISH -eq "true") {
     foreach ($image in $images) {
         foreach ($tag in $tags) {
