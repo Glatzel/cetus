@@ -12,11 +12,14 @@ ENV PATH="/home/runner/.pixi/bin:${PATH}"
 COPY --from=pixi-base --chown=runner /home/runner/.pixi /home/runner/.pixi
 COPY ./start-runner.sh /home/runner/start-runner.sh
 RUN chmod +x /home/runner/start-runner.sh
-RUN chown -R runner ~runner && /home/runner/.pixi/envs/runner/bin/installdependencies.sh && \
+RUN chown -R runner ~runner && \
+    usermod -aG sudo runner && \
+    /home/runner/.pixi/envs/runner/bin/installdependencies.sh && \
     rm -rf /var/lib/apt/lists/* && \
     apt clean && \
     apt autoclean && \
     apt autoremove -y
+WORKDIR /home/runner
 USER runner
 RUN pixi global list
-ENTRYPOINT ["bash","/home/runner/start-runner.sh"]
+ENTRYPOINT ["./start-runner.sh"]
