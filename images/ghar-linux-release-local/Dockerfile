@@ -11,7 +11,7 @@ RUN useradd -m runner
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
 COPY --from=pixi-base --chown=runner /home/runner/.pixi /home/runner/.pixi
 COPY ./start-runner.sh /home/runner/start-runner.sh
-RUN chmod +x start-runner.sh
+RUN chmod +x /home/runner/start-runner.sh
 RUN chown -R runner /home/runner/.pixi/envs/runner/bin/installdependencies.sh && \
     rm -rf /var/cache/dnf/* && \
     dnf clean all && \
