@@ -18,4 +18,4 @@ RUN chown -R runner /home/runner/.pixi/envs/runner/bin/installdependencies.sh &&
     dnf autoremove -y
 USER runner
 RUN pixi global list
-ENTRYPOINT ["bash /home/runner/start-runner.sh"]
+ENTRYPOINT ["bash", "/home/runner/start-runner.sh"]
