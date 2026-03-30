@@ -52,15 +52,8 @@ cleanup() {
     log "Runner removed"
 }
 
-trap 'log "SIGINT received"; cleanup; exit 130' INT
-trap 'log "SIGTERM received"; cleanup; exit 143' TERM
+trap 'cleanup; exit 130' INT
+trap 'cleanup; exit 143' TERM
 
 log "Starting GitHub Actions runner..."
-./run.sh &
-
-RUNNER_PID=$!
-wait $RUNNER_PID
-
-log "Runner process exited"
-cleanup
-log "Container shutdown complete"
+./run.sh & wait $!
