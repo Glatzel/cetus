@@ -15,7 +15,7 @@ GH_TOKEN=$GH_TOKEN
 
 log "Repository: ${GH_OWNER}/${GH_REPOSITORY}"
 
-RUNNER_SUFFIX=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 8 | head -n 1)
+RUNNER_SUFFIX=$(head -c 256 /dev/urandom | tr -dc 'a-z0-9' | head -c 8)
 RUNNER_NAME="dockerNode-${RUNNER_SUFFIX}"
 
 log "Generated runner name: ${RUNNER_NAME}"
