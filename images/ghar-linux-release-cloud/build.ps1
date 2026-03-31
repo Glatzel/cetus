@@ -3,7 +3,7 @@ $PSNativeCommandUseErrorActionPreference = $true
 $tags = @(
     "latest",
     "alma8",
-    "v0.2.0",
+    "v0.3.0",
     "$(Get-Date -Format 'yyyy-MM-dd')"
 )
 $pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
