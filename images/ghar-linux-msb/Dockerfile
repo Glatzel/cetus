@@ -15,7 +15,7 @@ RUN chmod +x /home/runner/start-runner.sh
 RUN chown -R runner ~runner && \
     usermod -aG sudo runner && \
     apt update && \
-    apt install -y --no-install-recommends ca-certificates \
+    apt install -y --no-install-recommends ca-certificates && \
     /home/runner/.pixi/envs/runner/bin/installdependencies.sh && \
     rm -rf /var/lib/apt/lists/* && \
     apt clean && \
