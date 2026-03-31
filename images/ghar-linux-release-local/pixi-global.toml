@@ -4,7 +4,6 @@ channels = ["https://prefix.dev/glatzel", "conda-forge"]
 [envs.base.dependencies]
 7-zip = "*"
 aria2 = "*"
-ca-certificates = "*"
 curl = "*"
 gh = "*"
 git = "*"

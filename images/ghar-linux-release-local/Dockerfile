@@ -13,6 +13,8 @@ COPY --from=pixi-base --chown=runner /home/runner/.pixi /home/runner/.pixi
 COPY ./start-runner.sh /home/runner/start-runner.sh
 RUN chmod +x /home/runner/start-runner.sh
 RUN chown -R runner ~runner && \
+    dnf update -y && \
+    dnf install -y ca-certificates && \
     /home/runner/.pixi/envs/runner/bin/installdependencies.sh && \
     rm -rf /var/cache/dnf/* && \
     dnf clean all && \
