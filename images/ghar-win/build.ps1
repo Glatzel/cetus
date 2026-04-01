@@ -22,7 +22,7 @@ foreach ($image in $images) {
 docker build @buildArgs .
 
 docker image ls
-docker history glatzel/ghar-win-local:latest
+docker history "glatzel/$name:latest"
 
 if ($env:PUBLISH -eq "true") {
     foreach ($image in $images) {
