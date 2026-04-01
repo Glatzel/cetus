@@ -7,7 +7,7 @@ $images = @(
 )
 $tags = @(
     "latest",
-    "v0.0.3",
+    "v0.0.1",
     "$(Get-Date -Format 'yyyy-MM-dd')"
     "ltsc2025"
 )
