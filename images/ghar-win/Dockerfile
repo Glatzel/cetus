@@ -1,3 +1,6 @@
+# This Dockerfile sets up the image for docker with github action runner installed.
+# Use this image for generic development.
+
 FROM mcr.microsoft.com/windows/servercore:ltsc2025
 SHELL ["cmd", "/S", "/C"]
 RUN powershell -ExecutionPolicy Bypass -c "irm -useb https://pixi.sh/install.ps1 | iex"

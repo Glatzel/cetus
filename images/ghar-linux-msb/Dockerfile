@@ -1,3 +1,5 @@
+# This Dockerfile sets up the image for microsandbox with github action runner installed.
+
 FROM almalinux:8 AS pixi-base
 RUN useradd -m runner
 USER runner

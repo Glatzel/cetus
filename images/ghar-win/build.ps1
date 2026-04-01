@@ -1,9 +1,9 @@
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
-
+$name = "ghar-win"
 $images = @(
-    "glatzel/ghar-win-local",
-    "ghcr.io/glatzel/ghar-win-local"
+    "glatzel/$name",
+    "ghcr.io/glatzel/$name"
 )
 $tags = @(
     "latest"

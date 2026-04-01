@@ -1,21 +1,22 @@
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
+$name = "ghar-linux-release"
 $tags = @(
     "latest",
     "alma8",
-    "v0.3.0",
+    "v0.1.0",
     "$(Get-Date -Format 'yyyy-MM-dd')"
 )
 $pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
 $images = @(
-    "glatzel/ghar-linux-release-cloud",
-    "ghcr.io/glatzel/ghar-linux-release-cloud"
+    "glatzel/$name",
+    "ghcr.io/glatzel/$name"
 )
 $buildArgs = @(
     "buildx", "build",
     $pushFlag,
     "--platform", "linux/amd64,linux/arm64",
-    "--target", "release-cloud"
+    "--target", "release-local"
 )
 foreach ($image in $images) {
     foreach ($tag in $tags) {
