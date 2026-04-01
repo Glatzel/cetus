@@ -1,3 +1,5 @@
+# This Dockerfile sets up the image for rattler-build.
+
 FROM almalinux:8 AS pixi-base
 ENV PATH="/root/.pixi/bin:${PATH}"
 COPY ./pixi-global.toml /root/.pixi/manifests/pixi-global.toml

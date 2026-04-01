@@ -1,3 +1,6 @@
+# This Dockerfile sets up the image for docker with github action runner installed.
+# Use this image for rattler-build release.
+
 FROM almalinux:8 AS pixi-base
 RUN useradd -m runner
 USER runner

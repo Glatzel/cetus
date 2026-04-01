@@ -1,5 +1,6 @@
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
+$name = "ghar-linux-dev"
 $tags = @(
     "latest"
     "ubuntu-24.04"
@@ -8,8 +9,8 @@ $tags = @(
 )
 $pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
 $images = @(
-    "glatzel/ghar-linux-dev-local",
-    "ghcr.io/glatzel/ghar-linux-dev-local"
+    "glatzel/$name",
+    "ghcr.io/glatzel/$name"
 )
 $buildArgs = @(
     "buildx", "build",

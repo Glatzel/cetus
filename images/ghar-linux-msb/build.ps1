@@ -3,7 +3,7 @@ $PSNativeCommandUseErrorActionPreference = $true
 $tags = @(
     "latest"
     "debian-13"
-    "v0.0.1"
+    "v0.1.0"
     "$(Get-Date -Format 'yyyy-MM-dd')"
 )
 $pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
