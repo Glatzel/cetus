@@ -2,6 +2,5 @@ name,machine,cross
 ci-linux-release,ubuntu-latest,true
 ci-win,windows-latest,false
 ghar-linux-dev,ubuntu-latest,true
-ghar-linux-msb,ubuntu-latest,true
 ghar-linux-release,ubuntu-latest,true
 ghar-win,windows-latest,false
