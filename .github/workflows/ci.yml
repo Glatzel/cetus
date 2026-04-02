@@ -20,6 +20,7 @@ jobs:
   lefthook:
     permissions:
       contents: write
+      pull-requests: write
     uses: ./.github/workflows/ci-lefthook.yml
   dispatch:
     runs-on: ubuntu-slim
