@@ -6,7 +6,8 @@ COPY ./pixi-global.toml /root/.pixi/manifests/pixi-global.toml
 RUN curl -fsSL https://pixi.sh/install.sh | bash
 RUN pixi global update
 
-FROM almalinux:8 AS release-cloud
+FROM almalinux:8-minimal AS release-cloud
 ENV PATH="/root/.pixi/bin:${PATH}"
 COPY --from=pixi-base /root/.pixi /root/.pixi
+run ln -s /usr/bin/microdnf /usr/bin/dnf
 RUN pixi global list
