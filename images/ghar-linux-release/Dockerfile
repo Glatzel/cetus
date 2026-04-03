@@ -10,13 +10,14 @@ RUN curl -fsSL https://pixi.sh/install.sh | bash
 RUN pixi global update
 
 FROM almalinux:8-minimal AS release-local
-RUN useradd -m runner
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
 COPY --from=pixi-base --chown=runner /home/runner/.pixi /home/runner/.pixi
 COPY ./start-runner.sh /home/runner/start-runner.sh
 RUN ln -s /usr/bin/microdnf /usr/bin/dnf
-RUN chmod +x /home/runner/start-runner.sh
-RUN chown -R runner ~runner && \
+RUN dnf install -y shadow-utils && \
+    useradd -m runner && \
+    chmod +x /home/runner/start-runner.sh && \
+    chown -R runner ~runner && \
     dnf update -y && \
     dnf install -y ca-certificates && \
     /home/runner/.pixi/envs/runner/bin/installdependencies.sh && \
