@@ -41,7 +41,7 @@ fi
     --token ${REG_TOKEN} \
     --name ${RUNNER_NAME} \
     --labels ${RUNNER_LABELS} \
-    ${EPHEMERAL_FLAG} \
+    ${EPHEMERAL_FLAG}
 log "Runner successfully configured"
 cleanup() {
     log "Removing runner from GitHub..."
