@@ -10,8 +10,11 @@ GH_OWNER=$GH_OWNER
 GH_REPOSITORY=$GH_REPOSITORY
 GH_TOKEN=$GH_TOKEN
 EPHEMERAL=${EPHEMERAL:-false}
+RUNNER_LABELS=${RUNNER_LABELS:-self-hosted}
 log "Repository: ${GH_OWNER}/${GH_REPOSITORY}"
 log "Ephemeral mode: ${EPHEMERAL}"
+log "Runner labels: ${RUNNER_LABELS}"
+
 RUNNER_SUFFIX=$(head -c 256 /dev/urandom | tr -dc 'a-z0-9' | head -c 8)
 RUNNER_NAME="dockerNode-${RUNNER_SUFFIX}"
 log "Generated runner name: ${RUNNER_NAME}"
@@ -37,7 +40,8 @@ fi
     --url https://github.com/${GH_OWNER}/${GH_REPOSITORY} \
     --token ${REG_TOKEN} \
     --name ${RUNNER_NAME} \
-    ${EPHEMERAL_FLAG}
+    --labels ${RUNNER_LABELS} \
+    ${EPHEMERAL_FLAG} \
 log "Runner successfully configured"
 cleanup() {
     log "Removing runner from GitHub..."
