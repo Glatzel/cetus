@@ -4,7 +4,7 @@ $name = "ghar-linux-dev"
 $tags = @(
     "latest"
     "ubuntu-24.04"
-    "v0.1.0"
+    "v0.1.1"
     "$(Get-Date -Format 'yyyy-MM-dd')"
 )
 $pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
