@@ -6,9 +6,9 @@ log() {
 log "Runner container starting..."
 log "PATH: ${PATH}"
 log "PWD: ${PWD}"
-GH_OWNER=${GH_OWNER:-1}
-GH_REPOSITORY=${GH_REPOSITORY:-2}
-GH_TOKEN=${GH_TOKEN:-3}
+GH_OWNER=${1:?GH_OWNER required}
+GH_REPOSITORY=${2:?GH_REPOSITORY required}
+GH_TOKEN=${3:?GH_TOKEN required}
 EPHEMERAL=${EPHEMERAL:-false}
 RUNNER_LABELS=${RUNNER_LABELS:-self-hosted}
 EPHEMERAL_FLAG=""
