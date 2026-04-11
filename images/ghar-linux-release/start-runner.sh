@@ -6,11 +6,16 @@ log() {
 log "Runner container starting..."
 log "PATH: ${PATH}"
 log "PWD: ${PWD}"
-GH_OWNER=$GH_OWNER
-GH_REPOSITORY=$GH_REPOSITORY
-GH_TOKEN=$GH_TOKEN
+GH_OWNER=${GH_OWNER:-1}
+GH_REPOSITORY=${GH_REPOSITORY:-2}
+GH_TOKEN=${GH_TOKEN:-3}
 EPHEMERAL=${EPHEMERAL:-false}
 RUNNER_LABELS=${RUNNER_LABELS:-self-hosted}
+EPHEMERAL_FLAG=""
+if [[ "${EPHEMERAL,,}" != "false" ]]; then
+    EPHEMERAL="true"
+    EPHEMERAL_FLAG="--ephemeral"
+fi
 log "Repository: ${GH_OWNER}/${GH_REPOSITORY}"
 log "Ephemeral mode: ${EPHEMERAL}"
 log "Runner labels: ${RUNNER_LABELS}"
@@ -31,10 +36,7 @@ fi
 log "Registration token received"
 cd .pixi/envs/runner
 log "Configuring GitHub Actions runner..."
-EPHEMERAL_FLAG=""
-if [ "${EPHEMERAL}" = "true" ]; then
-    EPHEMERAL_FLAG="--ephemeral"
-fi
+
 ./config.sh \
     --unattended \
     --url https://github.com/${GH_OWNER}/${GH_REPOSITORY} \
@@ -51,7 +53,7 @@ cleanup() {
 trap 'cleanup; exit 130' INT
 trap 'cleanup; exit 143' TERM
 log "Starting GitHub Actions runner..."
-if [ "${EPHEMERAL}" = "true" ]; then
+if [ "${EPHEMERAL_FLAG}" = "--ephemeral" ]; then
     ./run.sh
     log "Ephemeral runner finished job, exiting..."
     exit 0
