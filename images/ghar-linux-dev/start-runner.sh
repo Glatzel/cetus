@@ -32,7 +32,7 @@ log "Registration token received"
 cd .pixi/envs/runner
 log "Configuring GitHub Actions runner..."
 EPHEMERAL_FLAG=""
-if [ "${EPHEMERAL}" = "true" ]; then
+if [ "${EPHEMERAL}" != "false" ]; then
     EPHEMERAL_FLAG="--ephemeral"
 fi
 ./config.sh \
