@@ -19,7 +19,9 @@ jq = "jq"
 
 [envs.powershell]
 channels = ["conda-forge"]
+
 [envs.powershell.dependencies]
 powershell = "*"
+
 [envs.powershell.exposed]
 pwsh = "pwsh"
