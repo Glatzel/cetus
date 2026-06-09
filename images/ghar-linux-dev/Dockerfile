@@ -9,7 +9,7 @@ COPY --chown=runner ./pixi-global.toml /home/runner/.pixi/manifests/pixi-global.
 RUN curl -fsSL https://pixi.sh/install.sh | bash
 RUN pixi global update
 
-FROM ubuntu:24.04 AS dev-local
+FROM ubuntu:26.04 AS dev-local
 RUN useradd -m runner
 ENV PATH="/home/runner/.pixi/bin:${PATH}"
 COPY --from=pixi-base --chown=runner /home/runner/.pixi /home/runner/.pixi
