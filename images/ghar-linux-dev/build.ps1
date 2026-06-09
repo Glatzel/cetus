@@ -3,8 +3,8 @@ $PSNativeCommandUseErrorActionPreference = $true
 $name = "ghar-linux-dev"
 $tags = @(
     "latest"
-    "ubuntu-24.04"
-    "v0.1.3"
+    "ubuntu-26.04"
+    "v0.2.0"
     "$(Get-Date -Format 'yyyy-MM-dd')"
 )
 $pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
