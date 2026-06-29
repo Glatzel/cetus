@@ -4,7 +4,7 @@ $name = "ci-linux-release"
 $tags = @(
     "latest",
     "alma8",
-    "v0.1.2",
+    "v0.1.3",
     "$(Get-Date -Format 'yyyy-MM-dd')"
 )
 $pushFlag = if ($env:PUBLISH -eq "true") { "--push" } else { $null }
