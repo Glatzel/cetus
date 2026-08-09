@@ -35,14 +35,14 @@ RUN install_houdini_launcher houdini_launcher && \
     echo "client_id=$SIDEFX_CLIENT_ID" > "./setting.ini" && \
     echo "client_secret=${SIDEFX_CLIENT_SECRET}" >> "./setting.ini" && \
     mkdir -p ~/.local/share/applications
-#     ./houdini_launcher/bin/houdini_installer \
-#     install \
-#     --accept-EULA SideFX-2021-10-13 \
-#     --settings-file ./houdini_launcher/bin/setting.ini \
-#     --product Houdini \
-#     --version  \
-#     --platform linux_x86_64_gcc14.2 && \
-#     houdini_launcher/bin/houdini_installer list && \
+RUN ./houdini_launcher/bin/houdini_installer \
+    install \
+    --accept-EULA SideFX-2021-10-13 \
+    --settings-file ./houdini_launcher/bin/setting.ini \
+    --product Houdini \
+    --version  \
+    --platform linux_x86_64_gcc14.2 && \
+    houdini_launcher/bin/houdini_installer list
 #     && \
 #     sudo ./houdini_launcher/bin/houdini_installer \
 #     install \
