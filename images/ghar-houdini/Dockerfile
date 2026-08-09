@@ -21,7 +21,7 @@ RUN chmod +x /home/devuser/start-runner.sh
 RUN chown -R devuser /home/devuser && \
     apt update && \
     apt install -y --no-install-recommends ca-certificates sudo \
-    libasound2 libc6 libcups2 libcurl4 libdbus-1-3 libdrm2 libegl1 libexpat1 libfontconfig1 libgcc-s1 libgl1 libglib2.0-0 libglu1-mesa libglx0 libice6 libncursesw6 libnspr4 libnss3 libopengl0 libpci3 libsm6 libxcb-cursor0 \
+    libasound2 libc6 libcups2t64 libcurl4t64 libdbus-1-3 libdrm2 libegl1 libexpat1 libfontconfig1 libgcc-s1 libgl1 libglib2.0-0t64 libglu1-mesa libglx0 libice6 libncursesw6 libnspr4 libnss3 libopengl0 libpci3 libsm6 libxcb-cursor0 \
     && \
     usermod -aG sudo devuser && \
     echo "devuser ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/devuser && \
