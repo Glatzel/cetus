@@ -32,10 +32,12 @@ RUN chown -R devuser /home/devuser && \
 WORKDIR /home/devuser
 USER devuser
 RUN install_houdini_launcher houdini_launcher && \
+    mkdir -p ~/.local/share/applications
+
+RUN --mount=type=secret,id=sidefx_client_secret \
     echo "client_id=$SIDEFX_CLIENT_ID" > "./setting.ini" && \
     echo "client_secret=${SIDEFX_CLIENT_SECRET}" >> "./setting.ini" && \
-    mkdir -p ~/.local/share/applications
-RUN ./houdini_launcher/bin/houdini_installer \
+    sudo ./houdini_launcher/bin/houdini_installer \
     install \
     --accept-EULA SideFX-2021-10-13 \
     --settings-file ./setting.ini \
@@ -44,7 +46,10 @@ RUN ./houdini_launcher/bin/houdini_installer \
     --platform linux_x86_64_gcc14.2 && \
     ./houdini_launcher/bin/houdini_installer list
 
-RUN sudo ./houdini_launcher/bin/houdini_installer \
+RUN --mount=type=secret,id=sidefx_client_secret \
+    echo "client_id=$SIDEFX_CLIENT_ID" > "./setting.ini" && \
+    echo "client_secret=${SIDEFX_CLIENT_SECRET}" >> "./setting.ini" && \
+    sudo ./houdini_launcher/bin/houdini_installer \
     install \
     --accept-EULA SideFX-2021-10-13 \
     --settings-file ./setting.ini \
@@ -52,10 +57,10 @@ RUN sudo ./houdini_launcher/bin/houdini_installer \
     --version $HOUDINI_VERSION \
     --platform linux_x86_64_gcc14.2 && \
     rm ./setting.ini
-# RUN cd hfs$HOUDINI_VERSION && \
-#     source houdini_setup && \
-#     cd - && \
-#     hserver -S localhost && \
-#     hserver && \
-#     hserver -l
+RUN cd hfs$HOUDINI_VERSION && \
+    source houdini_setup && \
+    cd - && \
+    hserver -S localhost && \
+    hserver && \
+    hserver -l
 ENTRYPOINT ["./start-runner.sh"]
