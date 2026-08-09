@@ -34,7 +34,7 @@ RUN chown -R devuser /home/devuser && \
 WORKDIR /home/devuser
 USER devuser
 RUN install_houdini_launcher houdini_launcher && \
-    mkdir -p ~/.local/share/applications
+    sudo mkdir -p /usr/share/applications
 
 RUN --mount=type=secret,id=sidefx_client_secret \
     echo "client_id=$SIDEFX_CLIENT_ID" > "./setting.ini" && \
@@ -46,7 +46,8 @@ RUN --mount=type=secret,id=sidefx_client_secret \
     --product Houdini \
     --version $HOUDINI_VERSION \
     --platform linux_x86_64_gcc14.2 && \
-    ./houdini_launcher/bin/houdini_installer list
+    ./houdini_launcher/bin/houdini_installer list && \
+    rm ./setting.ini
 
 RUN --mount=type=secret,id=sidefx_client_secret \
     echo "client_id=$SIDEFX_CLIENT_ID" > "./setting.ini" && \
