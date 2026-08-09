@@ -60,10 +60,4 @@ RUN --mount=type=secret,id=sidefx_client_secret \
     --version $HOUDINI_VERSION \
     --platform linux_x86_64_gcc14.2 && \
     rm ./setting.ini
-RUN cd hfs$HOUDINI_VERSION && \
-    source houdini_setup && \
-    cd - && \
-    hserver -S localhost && \
-    hserver && \
-    hserver -l
 ENTRYPOINT ["./start-runner.sh"]
