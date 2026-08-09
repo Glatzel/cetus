@@ -46,9 +46,21 @@ log "Configuring GitHub Actions runner..."
     ${EPHEMERAL_FLAG}
 log "Runner successfully configured"
 cleanup() {
+    local retries=5
+    local delay=10
     log "Removing runner from GitHub..."
-    ./config.sh remove --unattended --token ${REG_TOKEN}
-    log "Runner removed"
+    for i in $(seq 1 $retries); do
+        if ./config.sh remove --unattended --token "${REG_TOKEN}"; then
+            log "Runner removed"
+            return 0
+        fi
+
+        log "Runner removal failed (attempt ${i}/${retries}), retrying in ${delay}s..."
+        sleep "${delay}"
+    done
+
+    log "Failed to remove runner after ${retries} attempts"
+    return 1
 }
 trap 'cleanup; exit 130' INT
 trap 'cleanup; exit 143' TERM
@@ -59,4 +71,5 @@ if [ "${EPHEMERAL_FLAG}" = "--ephemeral" ]; then
     exit 0
 else
     ./run.sh & wait $!
+    cleanup
 fi
