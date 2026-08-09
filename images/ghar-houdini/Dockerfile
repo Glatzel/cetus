@@ -40,18 +40,18 @@ RUN ./houdini_launcher/bin/houdini_installer \
     --accept-EULA SideFX-2021-10-13 \
     --settings-file ./setting.ini \
     --product Houdini \
-    --version  \
+    --version $HOUDINI_VERSION \
     --platform linux_x86_64_gcc14.2 && \
     ./houdini_launcher/bin/houdini_installer list
 
-# RUN sudo ./houdini_launcher/bin/houdini_installer \
-#     install \
-#     --accept-EULA SideFX-2021-10-13 \
-#     --settings-file ./setting.ini \
-#     --product "License Server" \
-#     --version $HOUDINI_VERSION \
-#     --platform linux_x86_64_gcc14.2 && \
-#     rm ./setting.ini
+RUN sudo ./houdini_launcher/bin/houdini_installer \
+    install \
+    --accept-EULA SideFX-2021-10-13 \
+    --settings-file ./setting.ini \
+    --product "License Server" \
+    --version $HOUDINI_VERSION \
+    --platform linux_x86_64_gcc14.2 && \
+    rm ./setting.ini
 # RUN cd hfs$HOUDINI_VERSION && \
 #     source houdini_setup && \
 #     cd - && \
