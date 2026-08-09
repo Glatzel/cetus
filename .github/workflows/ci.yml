@@ -57,6 +57,8 @@ jobs:
     needs: dispatch
     env:
       PUBLISH: ${{ github.event_name == 'push' && 'true' || ''}}
+      SIDEFX_CLIENT_ID: ${{secrets.SIDEFX_CLIENT_ID}}
+      SIDEFX_CLIENT_SECRET: ${{secrets.SIDEFX_CLIENT_SECRET}}
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.dispatch.outputs.matrix) }}
