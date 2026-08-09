@@ -61,6 +61,9 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJSON(needs.dispatch.outputs.matrix) }}
     runs-on: ${{matrix.machine}}
+    env:
+      SIDEFX_CLIENT_ID: ${{secrets.SIDEFX_CLIENT_ID}}
+      SIDEFX_CLIENT_SECRET: ${{secrets.SIDEFX_CLIENT_SECRET}}
     steps:
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
