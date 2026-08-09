@@ -36,7 +36,6 @@ fi
 log "Registration token received"
 cd .pixi/envs/runner
 log "Configuring GitHub Actions runner..."
-./config.sh remove || true
 ./config.sh \
     --unattended \
     --url https://github.com/${GH_OWNER}/${GH_REPOSITORY} \
