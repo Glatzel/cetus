@@ -8,7 +8,7 @@ curl = "*"
 gh = "*"
 git = "*"
 jq = "*"
-vinaya = "*"
+vinaya-cli = "*"
 houdini-launcher = "*"
 
 [envs.base.exposed]
