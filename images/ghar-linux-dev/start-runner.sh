@@ -71,5 +71,4 @@ if [ "${EPHEMERAL_FLAG}" = "--ephemeral" ]; then
     exit 0
 else
     ./run.sh & wait $!
-    cleanup
 fi
