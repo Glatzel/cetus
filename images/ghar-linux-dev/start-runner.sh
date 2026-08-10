@@ -35,6 +35,10 @@ if [ -z "$REG_TOKEN" ]; then
 fi
 log "Registration token received"
 cd .pixi/envs/runner
+if [ -f ".runner" ]; then
+    log "Found leftover local runner state from a previous container, clearing it..."
+    rm -f .runner .credentials .credentials_rsaparams .setup_info
+fi
 log "Configuring GitHub Actions runner..."
 ./config.sh \
     --unattended \
