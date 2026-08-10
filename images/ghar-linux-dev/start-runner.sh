@@ -44,23 +44,28 @@ log "Configuring GitHub Actions runner..."
     --labels ${RUNNER_LABELS} \
     ${EPHEMERAL_FLAG}
 log "Runner successfully configured"
+CLEANED_UP=0
 cleanup() {
+    if [ "${CLEANED_UP}" -eq 1 ]; then
+        return 0
+    fi
+    CLEANED_UP=1
+
     local retries=5
     local delay=10
     log "Removing runner from GitHub..."
-    for i in $(seq 1 $retries); do
+    for i in $(seq 1 "$retries"); do
         if ./config.sh remove --unattended --token "${REG_TOKEN}"; then
             log "Runner removed"
             return 0
         fi
-
         log "Runner removal failed (attempt ${i}/${retries}), retrying in ${delay}s..."
         sleep "${delay}"
     done
-
     log "Failed to remove runner after ${retries} attempts"
     return 1
 }
+trap cleanup EXIT
 trap 'cleanup; exit 130' INT
 trap 'cleanup; exit 143' TERM
 log "Starting GitHub Actions runner..."
