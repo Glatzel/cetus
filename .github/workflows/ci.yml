@@ -17,6 +17,12 @@ concurrency:
   cancel-in-progress: ${{ github.event_name != 'push'}}
 
 jobs:
+  lefthook:
+    if: ${{ github.event_name == 'pull_request' }}
+    uses: ./.github/workflows/ci-lefthook.yml
+    permissions:
+      contents: write
+      pull-requests: write
   dispatch:
     runs-on: ubuntu-slim
     outputs:
@@ -90,7 +96,7 @@ jobs:
         shell: pwsh
   check-point:
     if: ( cancelled() || failure() ) && github.event_name == 'pull_request'
-    needs: [ build, dispatch]
+    needs: [ lefthook, build, dispatch]
     runs-on: ubuntu-slim
     steps:
       - run: exit 1
