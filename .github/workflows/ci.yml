@@ -90,7 +90,7 @@ jobs:
         shell: pwsh
   check-point:
     if: ( cancelled() || failure() ) && github.event_name == 'pull_request'
-    needs: [lefthook, build, dispatch]
+    needs: [ build, dispatch]
     runs-on: ubuntu-slim
     steps:
       - run: exit 1
